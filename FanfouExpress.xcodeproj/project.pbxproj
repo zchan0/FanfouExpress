@@ -10,6 +10,10 @@
 		3E5691735C98F8AB9EAEFA91 /* Pods_FanfouExpressTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39DA2307EFC0987BDCE410F /* Pods_FanfouExpressTests.framework */; };
 		5FA1A0479C41C9D6C6727968 /* Pods_FanfouExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */; };
 		7FC4302DC8A33409E0CA805B /* Pods_FanfouExpressUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */; };
+		8B9FB7181E85ABF200DD2090 /* FFEConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */; };
+		8BBA8EAE1E8492A200D505FA /* Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EAD1E8492A200D505FA /* Digest.swift */; };
+		8BBA8EB11E849A7000D505FA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EB01E849A7000D505FA /* Message.swift */; };
+		8BBA8EB31E84A6B600D505FA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EB21E84A6B600D505FA /* Router.swift */; };
 		8BD3C6511E84912D0061455A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3C6501E84912D0061455A /* AppDelegate.swift */; };
 		8BD3C6531E84912D0061455A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3C6521E84912D0061455A /* ViewController.swift */; };
 		8BD3C6581E84912D0061455A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3C6571E84912D0061455A /* Assets.xcassets */; };
@@ -39,6 +43,10 @@
 		1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpressUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47D360653A542CEA5869F63A /* Pods-FanfouExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.release.xcconfig"; sourceTree = "<group>"; };
+		8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FFEConstants.swift; path = Model/FFEConstants.swift; sourceTree = "<group>"; };
+		8BBA8EAD1E8492A200D505FA /* Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Digest.swift; path = Model/Digest.swift; sourceTree = "<group>"; };
+		8BBA8EB01E849A7000D505FA /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
+		8BBA8EB21E84A6B600D505FA /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8BD3C64D1E84912D0061455A /* FanfouExpress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanfouExpress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD3C6501E84912D0061455A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BD3C6521E84912D0061455A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +112,16 @@
 			name = SupportFiles;
 			sourceTree = "<group>";
 		};
+		8BBA8EAF1E8492A600D505FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8BBA8EAD1E8492A200D505FA /* Digest.swift */,
+				8BBA8EB01E849A7000D505FA /* Message.swift */,
+				8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		8BD3C6441E84912C0061455A = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +149,8 @@
 			children = (
 				8BD3C6501E84912D0061455A /* AppDelegate.swift */,
 				8BD3C6521E84912D0061455A /* ViewController.swift */,
+				8BBA8EB21E84A6B600D505FA /* Router.swift */,
+				8BBA8EAF1E8492A600D505FA /* Model */,
 				8BBA8EAB1E84919C00D505FA /* Assets */,
 				8BBA8EAC1E8491A200D505FA /* SupportFiles */,
 			);
@@ -459,7 +479,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BD3C6531E84912D0061455A /* ViewController.swift in Sources */,
+				8BBA8EB11E849A7000D505FA /* Message.swift in Sources */,
+				8BBA8EB31E84A6B600D505FA /* Router.swift in Sources */,
 				8BD3C6511E84912D0061455A /* AppDelegate.swift in Sources */,
+				8BBA8EAE1E8492A200D505FA /* Digest.swift in Sources */,
+				8B9FB7181E85ABF200DD2090 /* FFEConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
