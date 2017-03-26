@@ -7,6 +7,35 @@
 //
 
 import Foundation
+import UIKit
+
+typealias JSON = [String : Any]
+
+struct Constants {
+    static let defaultFontName = "Pingfang SC"
+}
+
+// - MARK:
+
+struct CellStyle {
+    
+    // Font
+    static let ContentSize: CGFloat = 24
+    static let ContentFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ContentSize)
+
+    static let ScreenNameSize: CGFloat = 17
+    static let ScrrenNameFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ScreenNameSize)
+    
+    // Spacing
+    static let ContentVerticalMargin: CGFloat = 15  // margin between contentLabel and the element below it
+    static let PreviewVerticalMargin: CGFloat = 15  // margin between previewImageView and the element below it
+    static let ContentInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20)  // paddings
+    
+    // Image
+    static let ImageHeight: CGFloat = 250
+}
+
+// - MARK:
 
 extension Digest {
     
@@ -17,6 +46,8 @@ extension Digest {
         static let Messages = "msgs"
     }
 }
+
+// - MARK:
 
 extension Message {
     
@@ -36,6 +67,8 @@ extension Message {
         static let Image = "img"
     }
 }
+
+// - MARK:
 
 extension Image {
     
