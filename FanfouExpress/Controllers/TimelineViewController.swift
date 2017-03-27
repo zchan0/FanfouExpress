@@ -20,10 +20,13 @@ class TimelineViewController: UIViewController {
             return formatter.string(from: Date())
         }
     }
+    
     private var tableView: UITableView
+    private var navigationBar: TimelineNavigationbar
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         tableView = UITableView(frame: .zero, style: .plain)
+        navigationBar = TimelineNavigationbar()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,12 +39,18 @@ class TimelineViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 150
         tableView.backgroundColor = UIColor.white
         tableView.register(TimelineTableViewCell.self)
-        tableView.estimatedRowHeight = 150
-        view.addSubview(tableView)
         
-        title = "每日精选"
+        let offsetY = UIDevice.navigationBarHeight() - UIDevice.statusBarHeight()
+        tableView.contentOffset = CGPoint(x: 0, y: -offsetY)
+        tableView.contentInset  = UIEdgeInsetsMake(offsetY, 0, 0, 0)
+        
+        navigationBar.title = "每日精选"
+        
+        view.addSubview(tableView)
+        view.addSubview(navigationBar)
         
         fetchDigest({
             self.tableView.reloadData()
@@ -51,6 +60,7 @@ class TimelineViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        navigationBar.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: view.bounds.width, height: UIDevice.navigationBarHeight()))
         tableView.frame = view.bounds
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 typealias JSON = [String : Any]
 
 struct Constants {
-    static let defaultFontName = "Kaiti SC"
+    static let defaultFontName = "Kaiti SC"    
 }
 
 // - MARK:
@@ -29,10 +29,19 @@ struct CellStyle {
     // Spacing
     static let ContentVerticalMargin: CGFloat = 15  // margin between contentLabel and the element below it
     static let PreviewVerticalMargin: CGFloat = 15  // margin between previewImageView and the element below it
-    static let ContentInsets = UIEdgeInsets(top: 15, left: 25, bottom: 10, right: 20)  // paddings
+    static let ContentInsets = UIEdgeInsets(top: 10, left: 25, bottom: 10, right: 20)  // paddings
     
     // Image
     static let ImageHeight: CGFloat = 250
+}
+
+// - MARK: 
+
+struct NavigationBarAppearance {
+    
+    // Font
+    static let TitleSize: CGFloat = 17
+    static let TitleFont: UIFont = UIFont.defaultFont(ofSize: NavigationBarAppearance.TitleSize)
 }
 
 // - MARK:
