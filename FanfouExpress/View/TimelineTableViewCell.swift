@@ -25,7 +25,7 @@ class TimelineTableViewCell: UITableViewCell {
         self.contentLabel.font = CellStyle.ContentFont
         
         self.screenNameLabel.textAlignment = .right
-        self.screenNameLabel.font = CellStyle.ScrrenNameFont
+        self.screenNameLabel.font = CellStyle.ScreenNameFont
         
         self.previewImageView.isHidden = true
         self.previewImageView.clipsToBounds = true
@@ -35,6 +35,8 @@ class TimelineTableViewCell: UITableViewCell {
         self.contentView.addSubview(contentLabel)
         self.contentView.addSubview(screenNameLabel)
         self.contentView.addSubview(previewImageView)
+        
+        self.selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

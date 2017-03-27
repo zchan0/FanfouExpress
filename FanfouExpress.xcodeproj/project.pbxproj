@@ -13,6 +13,7 @@
 		8B234A3A1E86D2DC008DC5AA /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */; };
 		8B234A3D1E873848008DC5AA /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A3C1E873848008DC5AA /* TimelineViewController.swift */; };
 		8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234ABC1E88027D008DC5AA /* Extensions.swift */; };
+		8B234AC11E888C97008DC5AA /* Kaiti.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 8B234AC01E888C97008DC5AA /* Kaiti.ttc */; };
 		8B9FB7181E85ABF200DD2090 /* FFEConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */; };
 		8BBA8EAE1E8492A200D505FA /* Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EAD1E8492A200D505FA /* Digest.swift */; };
 		8BBA8EB11E849A7000D505FA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EB01E849A7000D505FA /* Message.swift */; };
@@ -48,6 +49,7 @@
 		8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineTableViewCell.swift; path = View/TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		8B234A3C1E873848008DC5AA /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = Controllers/TimelineViewController.swift; sourceTree = "<group>"; };
 		8B234ABC1E88027D008DC5AA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8B234AC01E888C97008DC5AA /* Kaiti.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kaiti.ttc; sourceTree = "<group>"; };
 		8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FFEConstants.swift; path = Model/FFEConstants.swift; sourceTree = "<group>"; };
 		8BBA8EAD1E8492A200D505FA /* Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Digest.swift; path = Model/Digest.swift; sourceTree = "<group>"; };
 		8BBA8EB01E849A7000D505FA /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				8BD3C6571E84912D0061455A /* Assets.xcassets */,
 				8BD3C6591E84912D0061455A /* LaunchScreen.storyboard */,
+				8B234AC01E888C97008DC5AA /* Kaiti.ttc */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			files = (
 				8BD3C65B1E84912D0061455A /* LaunchScreen.storyboard in Resources */,
 				8BD3C6581E84912D0061455A /* Assets.xcassets in Resources */,
+				8B234AC11E888C97008DC5AA /* Kaiti.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

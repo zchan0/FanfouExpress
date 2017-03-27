@@ -104,7 +104,7 @@ private extension TimelineViewController {
     func height(forMessage msg: Message) -> CGFloat {
         let width = view.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right
         let contentHeight = msg.content.height(forFont: CellStyle.ContentFont, forWidth: width)
-        let screenNameHeight = msg.realName.height(forFont: CellStyle.ScrrenNameFont, forWidth: width)
+        let screenNameHeight = msg.realName.height(forFont: CellStyle.ScreenNameFont, forWidth: width)
         
         return CellStyle.ContentInsets.top
             + contentHeight + CellStyle.ContentVerticalMargin

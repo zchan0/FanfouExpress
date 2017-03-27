@@ -10,13 +10,13 @@ import UIKit
 import Alamofire
 
 extension String {
+    
     func height(forFont font: UIFont, forWidth width: CGFloat) -> CGFloat {
         let boundingBox = (self as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
                                                           options: .usesLineFragmentOrigin,
                                                           attributes: [NSFontAttributeName : font], context: nil) as CGRect
         return CGFloat(ceilf(Float(boundingBox.height)))
     }
-    
 }
 
 extension UIFont {
