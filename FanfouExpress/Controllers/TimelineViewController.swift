@@ -13,6 +13,13 @@ import Alamofire
 class TimelineViewController: UIViewController {
     
     var digest: Digest?
+    var today: String {
+        get {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter.string(from: Date())
+        }
+    }
     private var tableView: UITableView
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -86,7 +93,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
 private extension TimelineViewController {
     
     func fetchDigest(_ completionHandler: @escaping () -> Void) {
-        let router = Router.fetchDailyDigests(date: "2016-11-13")
+        let router = Router.fetchDailyDigests(date: today)
         Alamofire.request(router).validate().responseJSON { (response) in
             switch response.result {
             case .success:
