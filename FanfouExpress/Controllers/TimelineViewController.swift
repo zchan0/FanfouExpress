@@ -13,10 +13,20 @@ import Alamofire
 class TimelineViewController: UIViewController {
     
     var digest: Digest?
+    var today: String {
+        get {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter.string(from: Date())
+        }
+    }
+    
     private var tableView: UITableView
+    private var navigationBar: TimelineNavigationbar
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         tableView = UITableView(frame: .zero, style: .plain)
+        navigationBar = TimelineNavigationbar()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,12 +39,18 @@ class TimelineViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 150
         tableView.backgroundColor = UIColor.white
         tableView.register(TimelineTableViewCell.self)
-        tableView.estimatedRowHeight = 150
-        view.addSubview(tableView)
         
-        title = "每日精选"
+        let offsetY = UIDevice.navigationBarHeight() - UIDevice.statusBarHeight()
+        tableView.contentOffset = CGPoint(x: 0, y: -offsetY)
+        tableView.contentInset  = UIEdgeInsetsMake(offsetY, 0, 0, 0)
+        
+        navigationBar.title = "每日精选"
+        
+        view.addSubview(tableView)
+        view.addSubview(navigationBar)
         
         fetchDigest({
             self.tableView.reloadData()
@@ -44,6 +60,7 @@ class TimelineViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        navigationBar.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: view.bounds.width, height: UIDevice.navigationBarHeight()))
         tableView.frame = view.bounds
     }
 }
@@ -61,7 +78,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let msgs = digest?.msgs else {
-            print("Failed to retrieve msgs in \(digest)")
+            print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return 0
         }
         
@@ -71,7 +88,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let msgs = digest?.msgs else {
-            print("Failed to retrieve msgs in \(digest)")
+            print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return UITableViewCell()
         }
         
@@ -86,7 +103,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
 private extension TimelineViewController {
     
     func fetchDigest(_ completionHandler: @escaping () -> Void) {
-        let router = Router.fetchDailyDigests(date: "2016-11-13")
+        let router = Router.fetchDailyDigests(date: today)
         Alamofire.request(router).validate().responseJSON { (response) in
             switch response.result {
             case .success:
@@ -104,7 +121,7 @@ private extension TimelineViewController {
     func height(forMessage msg: Message) -> CGFloat {
         let width = view.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right
         let contentHeight = msg.content.height(forFont: CellStyle.ContentFont, forWidth: width)
-        let screenNameHeight = msg.realName.height(forFont: CellStyle.ScrrenNameFont, forWidth: width)
+        let screenNameHeight = msg.realName.height(forFont: CellStyle.ScreenNameFont, forWidth: width)
         
         return CellStyle.ContentInsets.top
             + contentHeight + CellStyle.ContentVerticalMargin

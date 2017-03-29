@@ -10,21 +10,42 @@ import UIKit
 import Alamofire
 
 extension String {
+    
     func height(forFont font: UIFont, forWidth width: CGFloat) -> CGFloat {
         let boundingBox = (self as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
                                                           options: .usesLineFragmentOrigin,
                                                           attributes: [NSFontAttributeName : font], context: nil) as CGRect
         return CGFloat(ceilf(Float(boundingBox.height)))
     }
-    
 }
 
 extension UIFont {
+    
     class func defaultFont(ofSize size: CGFloat) -> UIFont {
         guard let font = UIFont(name: Constants.defaultFontName, size: size) else {
             return UIFont.systemFont(ofSize: size)
         }
         return font
+    }
+}
+
+extension UIDevice {
+    
+    // http://stackoverflow.com/a/12991955
+    class func statusBarHeight() -> CGFloat {
+        switch UIApplication.shared.statusBarOrientation {
+        case UIInterfaceOrientation.portrait, UIInterfaceOrientation.portraitUpsideDown:
+            return UIApplication.shared.statusBarFrame.height
+        case UIInterfaceOrientation.landscapeLeft, UIInterfaceOrientation.landscapeRight:
+            return UIApplication.shared.statusBarFrame.width
+        case UIInterfaceOrientation.unknown:
+            print("Something wrong with statusBar height")
+            return 0
+        }
+    }
+    
+    class func navigationBarHeight() -> CGFloat {
+        return 64
     }
 }
 

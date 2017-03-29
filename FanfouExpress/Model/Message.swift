@@ -21,7 +21,7 @@ struct Message {
     let image: Image?
     
     var description: String {
-        return "Message: { id: \(identifier), count: \(count), realname: \(realName), loginname: \(loginName), avatar: \(avatarURL), time: \(time), statusid: \(statusID), content: \(content), \(image?.description) }"
+        return "Message: { id: \(identifier), count: \(count), realname: \(realName), loginname: \(loginName), avatar: \(avatarURL), time: \(time), statusid: \(statusID), content: \(content), \(image?.description ?? "") }"
     }
     
     init?(json: Dictionary<String, Any>) {
