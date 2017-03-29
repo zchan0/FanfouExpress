@@ -78,7 +78,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let msgs = digest?.msgs else {
-            print("Failed to retrieve msgs in \(digest)")
+            print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return 0
         }
         
@@ -88,7 +88,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let msgs = digest?.msgs else {
-            print("Failed to retrieve msgs in \(digest)")
+            print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return UITableViewCell()
         }
         
