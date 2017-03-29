@@ -4,7 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Kaiti.ttc</string>
+		<string>STKaiti.ttf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

@@ -12,7 +12,7 @@ import UIKit
 typealias JSON = [String : Any]
 
 struct Constants {
-    static let defaultFontName = "Kaiti SC"    
+    static let defaultFontName = "STKaiti"    
 }
 
 // - MARK:
