@@ -47,7 +47,7 @@ struct Message {
         self.content    = content
         
         self.count = Int(count) ?? 0
-        self.avatarURL = URL(string: avatarUrl) ?? URL(string: Constants.EmptyAvatar)!
+        self.avatarURL = URL(string: avatarUrl.replacingOccurrences(of: "/s0/", with: "/l0/")) ?? URL(string: Constants.EmptyAvatar)!
         
         if let image = json[JSONResponseKeys.Image] as? [String : String] {
             self.image = Image(json: image)
@@ -77,7 +77,7 @@ struct Image {
         
         guard
             let pageURL = URL(string: pageUrl),
-            let previewURL = URL(string: previewUrl)
+            let previewURL = URL(string: previewUrl.replacingOccurrences(of: "/m0/", with: "/n0/"))
         else {
             print("Failed to convert pageUrl: \(pageUrl) or previewUrl: \(previewUrl) to URL")
             return nil
