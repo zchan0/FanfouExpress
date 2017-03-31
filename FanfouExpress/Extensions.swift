@@ -22,7 +22,7 @@ extension String {
 extension UIFont {
     
     class func defaultFont(ofSize size: CGFloat) -> UIFont {
-        guard let font = UIFont(name: Constants.defaultFontName, size: size) else {
+        guard let font = UIFont(name: Constants.DefaultFontName, size: size) else {
             return UIFont.systemFont(ofSize: size)
         }
         return font

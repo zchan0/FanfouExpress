@@ -41,6 +41,7 @@ class TimelineViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.backgroundColor = UIColor.white
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(TimelineTableViewCell.self)
         
         let offsetY = UIDevice.navigationBarHeight() - UIDevice.statusBarHeight()
@@ -97,6 +98,19 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
         cell.updateContentWith(msg)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let msgs = digest?.msgs else {
+            print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
+            return
+        }
+        let msg = msgs[indexPath.row]
+        
+        let detailsViewController = DetailsViewController(style: .plain)
+        detailsViewController.msg = msg
+        let navigationController = UINavigationController(rootViewController: detailsViewController)
+        present(navigationController, animated: true, completion: nil)
     }
 }
 

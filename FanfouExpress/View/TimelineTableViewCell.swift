@@ -42,21 +42,7 @@ class TimelineTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let contentRect = UIEdgeInsetsInsetRect(CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height), CellStyle.ContentInsets)
-        let contentSize = contentRect.size
-        let contentLabelSize = contentLabel.sizeThatFits(contentSize)
-        let screenNameSize   = screenNameLabel.sizeThatFits(contentSize)
-
-        return CGSize(width: size.width,
-                      height: CellStyle.ContentInsets.top
-                        + contentLabelSize.height + CellStyle.ContentVerticalMargin
-                        + (previewImageView.isHidden ? 0 : CellStyle.ImageHeight + CellStyle.PreviewVerticalMargin)
-                        + screenNameSize.height
-                        + CellStyle.ContentInsets.bottom)
-    }
-    
+        
     override func layoutSubviews() {
         super.layoutSubviews()
         

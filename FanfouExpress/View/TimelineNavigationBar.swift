@@ -25,8 +25,8 @@ class TimelineNavigationbar: UINavigationBar {
         self.titleLabel = UILabel()
         super.init(frame: frame)
         
-        self.titleLabel.font = NavigationBarAppearance.TitleFont
         self.titleLabel.textAlignment = .center
+        self.titleLabel.font = NavigationBarAppearance.TitleFont
         self.addSubview(titleLabel)
         
         self.isTranslucent = false
