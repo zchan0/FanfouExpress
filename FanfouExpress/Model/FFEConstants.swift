@@ -12,7 +12,14 @@ import UIKit
 typealias JSON = [String : Any]
 
 struct Constants {
-    static let defaultFontName = "STKaiti"    
+    static let DefaultFontName = "STKaiti"
+}
+
+// - MARK:
+
+struct FFEColor {
+    static let PrimaryColor = UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)
+    static let AccentColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1)
 }
 
 // - MARK:
