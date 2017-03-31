@@ -42,12 +42,36 @@ struct CellStyle {
     static let ImageHeight: CGFloat = 250
 }
 
+// - MARK:
+
+struct DetailCellStyle {
+    
+    // Font
+    static let ContentFontWithImage: UIFont = UIFont.defaultFont(ofSize: 24)
+    static let ContentFontWithoutImage: UIFont = UIFont.defaultFont(ofSize: 32)
+    static let ScreenNameFont: UIFont = UIFont.defaultFont(ofSize: 24)
+    static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 60)!
+    
+    // Spacing
+    static let ContentVerticalMargin: CGFloat = 8
+    static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 10, right: 20)
+
+    // header spacing
+    static let AvatarVerticalMargin: CGFloat = 30   // margin between avatarImageView and buttons above it
+    static let QuotationVerticalMargin: CGFloat = 8    // margin beween quotationLabel and avatarImageView
+    static let QuotationHorizontalPadding: CGFloat = 15
+    
+    // Image
+    static let AvatarHeight: CGFloat = 96
+    static let ImageHeight: CGFloat = 250
+}
+
 // - MARK: 
 
 struct NavigationBarAppearance {
     
     // Font
-    static let TitleSize: CGFloat = 17
+    static let TitleSize: CGFloat = 19
     static let TitleFont: UIFont = UIFont.defaultFont(ofSize: NavigationBarAppearance.TitleSize)
 }
 

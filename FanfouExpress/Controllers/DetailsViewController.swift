@@ -10,11 +10,13 @@ import UIKit
 
 class DetailsViewController: UITableViewController {
     
-    private let headerView: DetailsHeaderView
+    var msg: Message?
+    var dataArray: [UITableViewCell]
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        headerView = DetailsHeaderView()
-        super.init(nibName: nil, bundle: nil)
+    override init(style: UITableViewStyle) {
+        self.msg = nil
+        self.dataArray = [UITableViewCell]()
+        super.init(style: style)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,14 +29,72 @@ class DetailsViewController: UITableViewController {
         configNavigationBar()
         
         tableView.separatorStyle = .none
-        tableView.tableHeaderView = headerView
+        tableView.allowsSelection = false
+        tableView.showsVerticalScrollIndicator = false
         
-        headerView.avatar = #imageLiteral(resourceName: "avatar")
+        guard let msg = msg else {
+            return
+        }
+        
+        let headerCell = DetailHeaderCell(style: .default, reuseIdentifier: nil)
+        headerCell.updateCell(withAvatar: msg.avatarURL)
+        
+        let contentCell = DetailContentCell(style: .default, reuseIdentifier: nil)
+        contentCell.updateCell(withContent: msg.content, withImage: msg.image?.previewURL)
+        
+        let footerCell = DetailFooterCell(realName: msg.realName)
+        
+        dataArray = [headerCell, contentCell, footerCell]
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
 }
 
+// MARK: - TableView Delegate
+
+extension DetailsViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let msg = msg else {
+            return 0
+        }
+        
+        switch indexPath.row {
+        case 0:
+            return 200
+        case 1:
+            let font = msg.image == nil ? DetailCellStyle.ContentFontWithoutImage : DetailCellStyle.ContentFontWithImage
+            let contentWidth = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
+            let contentHeight = msg.content.height(forFont: font, forWidth: contentWidth)
+            return DetailCellStyle.ContentInsets.top + contentHeight + DetailCellStyle.ContentVerticalMargin + (msg.image == nil ? 0 : DetailCellStyle.ImageHeight)
+        case 2:
+            let contentWidth = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
+            return msg.realName.height(forFont: DetailCellStyle.ScreenNameFont, forWidth: contentWidth)
+        default:
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return dataArray[indexPath.row]
+    }
+}
+
+// MARK: - 
+
 private extension DetailsViewController {
+    
     func configNavigationBar() {
         // UI
         navigationController?.navigationBar.isTranslucent = false
@@ -54,7 +114,7 @@ private extension DetailsViewController {
     }
     
     @objc func pressDoneButton() {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func pressedShareButton() {

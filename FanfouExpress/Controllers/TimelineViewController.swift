@@ -105,9 +105,10 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
             print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return
         }
-        _ = msgs[indexPath.row]
+        let msg = msgs[indexPath.row]
         
-        let detailsViewController = DetailsViewController(nibName: nil, bundle: nil)
+        let detailsViewController = DetailsViewController(style: .plain)
+        detailsViewController.msg = msg
         let navigationController = UINavigationController(rootViewController: detailsViewController)
         present(navigationController, animated: true, completion: nil)
     }
