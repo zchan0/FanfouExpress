@@ -53,12 +53,12 @@ struct DetailCellStyle {
     static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 50)!
     
     // Spacing
-    static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 10, right: 20)
+    static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 20, right: 25)
 
     // header spacing
     static let AvatarVerticalMargin: CGFloat = 30   // margin between avatarImageView and buttons above it
     static let QuotationVerticalMargin: CGFloat = 8    // margin beween quotationLabel and avatarImageView
-    static let QuotationHorizontalPadding: CGFloat = 8
+    static let QuotationHorizontalPadding: CGFloat = 20
     
     // Image
     static let AvatarHeight: CGFloat = 96

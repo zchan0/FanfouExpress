@@ -62,7 +62,7 @@ extension DetailsViewController {
         
         switch indexPath.row {
         case 0:
-            return 200
+            return DetailHeaderCell.height(forWidth: view.bounds.width)
         case 1:
             let width = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
             return TimelineTableViewCell.height(forMessage: msg, forWidth: width, forContentInsets: DetailCellStyle.ContentInsets)
