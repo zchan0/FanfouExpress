@@ -71,6 +71,7 @@
 		8BD3C66C1E84912D0061455A /* FanfouExpressUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FanfouExpressUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD3C6701E84912D0061455A /* FanfouExpressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanfouExpressUITests.swift; sourceTree = "<group>"; };
 		8BD3C6721E84912D0061455A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BE662351E8F5E11001C3F3A /* FanfouExpress-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FanfouExpress-Bridging-Header.h"; sourceTree = "<group>"; };
 		B85525FD73FEEA26159B73E4 /* Pods-FanfouExpressTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests.release.xcconfig"; sourceTree = "<group>"; };
 		BC76A3615025083D1541A67D /* Pods-FanfouExpressUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4D743942131045245C6D229 /* Pods-FanfouExpress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 		8BBA8EAC1E8491A200D505FA /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				8BE662351E8F5E11001C3F3A /* FanfouExpress-Bridging-Header.h */,
 				8BD3C65C1E84912D0061455A /* Info.plist */,
 			);
 			name = SupportFiles;
@@ -674,6 +676,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = space.minesecret.FanfouExpress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FanfouExpress/FanfouExpress-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -688,6 +691,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = space.minesecret.FanfouExpress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FanfouExpress/FanfouExpress-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
