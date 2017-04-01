@@ -14,16 +14,14 @@ typealias JSON = [String : Any]
 
 struct Constants {
     static let DefaultFontName = "STKaiti"
+    static let HTTPScheme  = "http"
+    static let HTTPSScheme = "https"
 }
-
-// - MARK:
 
 struct FFEColor {
     static let PrimaryColor = UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)
     static let AccentColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1)
 }
-
-// - MARK:
 
 struct CellStyle {
     
@@ -49,8 +47,6 @@ struct CellStyle {
     static let ImageHeight: CGFloat = 250
 }
 
-// - MARK:
-
 struct DetailCellStyle {
     
     // Font
@@ -67,8 +63,6 @@ struct DetailCellStyle {
     // Image
     static let AvatarHeight: CGFloat = 96
 }
-
-// - MARK: 
 
 struct NavigationBarAppearance {
     
@@ -89,8 +83,6 @@ extension Digest {
     }
 }
 
-// - MARK:
-
 extension Message {
     
     struct Constants {
@@ -109,8 +101,6 @@ extension Message {
         static let Image = "img"
     }
 }
-
-// - MARK:
 
 extension Image {
     

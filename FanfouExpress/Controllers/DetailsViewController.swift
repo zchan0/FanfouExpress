@@ -8,6 +8,7 @@
 
 import UIKit
 import DTCoreText
+import SafariServices
 
 class DetailsViewController: UITableViewController {
     
@@ -87,6 +88,15 @@ extension DetailsViewController: DTAttributedTextContentViewDelegate {
     }
 }
 
+// MARK: - SFSafariViewControllerDelegate
+
+extension DetailsViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
 // MARK: - Private methods
 
 private extension DetailsViewController {
@@ -135,7 +145,14 @@ private extension DetailsViewController {
     }
     
     @objc func pressedLinkButton(sender: DTLinkButton) {
-        print(sender.url.absoluteString)
+        guard let url = sender.url else { return }        
+        
+        if url.scheme == Constants.HTTPScheme || url.scheme == Constants.HTTPSScheme {
+            let safariController = SFSafariViewController(url: url)
+            safariController.delegate = self
+            safariController.preferredControlTintColor = FFEColor.AccentColor
+            present(safariController, animated: true, completion: nil)
+        }
     }
 }
 
