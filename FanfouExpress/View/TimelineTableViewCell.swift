@@ -8,21 +8,21 @@
 
 import Foundation
 import UIKit
+import DTCoreText
 
 class TimelineTableViewCell: UITableViewCell {
 
-    private var contentLabel: UILabel
+    private var contentLabel: DTAttributedLabel
     private var screenNameLabel: UILabel
     private var previewImageView: UIImageView
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.contentLabel = UILabel()
+        self.contentLabel = DTAttributedLabel()
         self.screenNameLabel = UILabel()
         self.previewImageView = UIImageView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentLabel.numberOfLines = 0
-        self.contentLabel.font = CellStyle.ContentFont
         
         self.screenNameLabel.textAlignment = .right
         self.screenNameLabel.font = CellStyle.ScreenNameFont
@@ -51,9 +51,10 @@ class TimelineTableViewCell: UITableViewCell {
         let contentWidth = contentSize.width
         
         contentLabel.frame = {
-            let size = contentLabel.sizeThatFits(contentSize)
+            let height = contentLabel.attributedString.height(forOrigin: CGPoint(x: CellStyle.ContentInsets.left, y: CellStyle.ContentInsets.top),
+                                                              forWidth: contentWidth)
             let frame = CGRect(origin: CGPoint(x: CellStyle.ContentInsets.left, y: CellStyle.ContentInsets.top),
-                               size: CGSize(width: contentWidth, height: size.height))
+                               size: CGSize(width: contentWidth, height: height))
             return frame
         }()
         
@@ -76,15 +77,17 @@ class TimelineTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        contentLabel.text = nil
+        contentLabel.attributedString = nil
         screenNameLabel.text = nil
         previewImageView.image = nil
         previewImageView.isHidden = true
     }
     
     func updateContentWith(_ msg: Message) {
-        contentLabel.text = msg.content
         screenNameLabel.text = "—— \(msg.realName)"
+        
+        let attributedContent = NSAttributedString(htmlData: msg.content.data(using: .utf8), options: CellStyle.ContentAttributes, documentAttributes: nil)
+        contentLabel.attributedString = attributedContent
         
         if let imageURL = msg.image?.previewURL {
             previewImageView.isHidden = false

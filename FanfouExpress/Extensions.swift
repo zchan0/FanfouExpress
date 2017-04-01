@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import DTCoreText
 
 extension String {
     
@@ -16,6 +17,20 @@ extension String {
                                                           options: .usesLineFragmentOrigin,
                                                           attributes: [NSFontAttributeName : font], context: nil) as CGRect
         return CGFloat(ceilf(Float(boundingBox.height)))
+    }
+}
+
+extension NSAttributedString {
+    
+    func height(forOrigin origin: CGPoint, forWidth width: CGFloat) -> CGFloat {
+        guard let layouter = DTCoreTextLayouter(attributedString: self) else {
+            print("Failed to init layouter with \(self)")
+            return 0
+        }
+        
+        let layoutFrame: DTCoreTextLayoutFrame = layouter.layoutFrame(with: CGRect(origin: origin, size: CGSize(width: width, height: CGFloat(CGFLOAT_HEIGHT_UNKNOWN))),
+                                                                      range: NSMakeRange(0, self.length))
+        return layoutFrame.frame.height
     }
 }
 

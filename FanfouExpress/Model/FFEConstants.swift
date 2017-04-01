@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import DTCoreText
 
 typealias JSON = [String : Any]
 
@@ -29,6 +30,12 @@ struct CellStyle {
     // Font
     static let ContentSize: CGFloat = 24
     static let ContentFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ContentSize)
+    static let ContentAttributes = [
+        DTDefaultFontName : Constants.DefaultFontName,
+        DTDefaultFontSize : CellStyle.ContentSize,
+        DTDefaultLinkColor : FFEColor.AccentColor,
+        DTDefaultLinkDecoration : false
+    ] as [String : Any]
 
     static let ScreenNameSize: CGFloat = 17
     static let ScreenNameFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ScreenNameSize)
