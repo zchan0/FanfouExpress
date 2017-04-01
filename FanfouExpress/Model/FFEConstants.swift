@@ -8,27 +8,32 @@
 
 import Foundation
 import UIKit
+import DTCoreText
 
 typealias JSON = [String : Any]
 
 struct Constants {
     static let DefaultFontName = "STKaiti"
+    static let HTTPScheme  = "http"
+    static let HTTPSScheme = "https"
 }
-
-// - MARK:
 
 struct FFEColor {
     static let PrimaryColor = UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)
     static let AccentColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1)
 }
 
-// - MARK:
-
 struct CellStyle {
     
     // Font
     static let ContentSize: CGFloat = 24
     static let ContentFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ContentSize)
+    static let ContentAttributes = [
+        DTDefaultFontName : Constants.DefaultFontName,
+        DTDefaultFontSize : CellStyle.ContentSize,
+        DTDefaultLinkColor : FFEColor.AccentColor,
+        DTDefaultLinkDecoration : false
+    ] as [String : Any]
 
     static let ScreenNameSize: CGFloat = 17
     static let ScreenNameFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ScreenNameSize)
@@ -42,31 +47,22 @@ struct CellStyle {
     static let ImageHeight: CGFloat = 250
 }
 
-// - MARK:
-
 struct DetailCellStyle {
     
     // Font
-    static let ContentFontWithImage: UIFont = UIFont.defaultFont(ofSize: 24)
-    static let ContentFontWithoutImage: UIFont = UIFont.defaultFont(ofSize: 32)
-    static let ScreenNameFont: UIFont = UIFont.defaultFont(ofSize: 24)
     static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 60)!
     
     // Spacing
-    static let ContentVerticalMargin: CGFloat = 8
     static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 10, right: 20)
 
     // header spacing
     static let AvatarVerticalMargin: CGFloat = 30   // margin between avatarImageView and buttons above it
     static let QuotationVerticalMargin: CGFloat = 8    // margin beween quotationLabel and avatarImageView
-    static let QuotationHorizontalPadding: CGFloat = 15
+    static let QuotationHorizontalPadding: CGFloat = 8
     
     // Image
     static let AvatarHeight: CGFloat = 96
-    static let ImageHeight: CGFloat = 250
 }
-
-// - MARK: 
 
 struct NavigationBarAppearance {
     
@@ -87,8 +83,6 @@ extension Digest {
     }
 }
 
-// - MARK:
-
 extension Message {
     
     struct Constants {
@@ -107,8 +101,6 @@ extension Message {
         static let Image = "img"
     }
 }
-
-// - MARK:
 
 extension Image {
     

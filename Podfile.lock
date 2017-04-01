@@ -1,15 +1,35 @@
 PODS:
   - Alamofire (4.4.0)
+  - DTCoreText (1.6.20):
+    - DTCoreText/Core (= 1.6.20)
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTCoreText/Core (1.6.20):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTFoundation/Core (1.7.12)
+  - DTFoundation/DTAnimatedGIF (1.7.12)
+  - DTFoundation/DTHTMLParser (1.7.12):
+    - DTFoundation/Core
+  - DTFoundation/UIKit (1.7.12):
+    - DTFoundation/Core
   - Reveal-SDK (7)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - DTCoreText
   - Reveal-SDK
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  DTCoreText: 51904f2374af443e0d270d6fdc76035ab6f9ef8a
+  DTFoundation: 26a164ef510877387906fb92bff524a792db4bf8
   Reveal-SDK: 564657bc66c93d2718b1c0121cdebe99d354ddab
 
-PODFILE CHECKSUM: 45a3c71949dd33e04dee69c6bf05a42be003ced3
+PODFILE CHECKSUM: 3bbfa6490c7cd2bc6c76719b130f00a518cff610
 
 COCOAPODS: 1.2.0

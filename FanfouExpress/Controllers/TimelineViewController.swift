@@ -84,7 +84,9 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let msg = msgs[indexPath.row]
-        return height(forMessage: msg)
+        let width = view.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right
+
+        return TimelineTableViewCell.height(forMessage: msg, forWidth: width)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,7 +97,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
         
         let msg = msgs[indexPath.row]
         let cell: TimelineTableViewCell = tableView.dequeue(indexPath: indexPath)
-        cell.updateContentWith(msg)
+        cell.updateCell(msg)
         
         return cell
     }
@@ -130,17 +132,5 @@ private extension TimelineViewController {
                 print("reponse error")
             }
         }
-    }
-    
-    func height(forMessage msg: Message) -> CGFloat {
-        let width = view.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right
-        let contentHeight = msg.content.height(forFont: CellStyle.ContentFont, forWidth: width)
-        let screenNameHeight = msg.realName.height(forFont: CellStyle.ScreenNameFont, forWidth: width)
-        
-        return CellStyle.ContentInsets.top
-            + contentHeight + CellStyle.ContentVerticalMargin
-            + screenNameHeight 
-            + (msg.image == nil ? 0 : CellStyle.ImageHeight + CellStyle.PreviewVerticalMargin)
-            + CellStyle.ContentInsets.bottom
     }
 }

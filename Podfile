@@ -7,6 +7,7 @@ target 'FanfouExpress' do
 
   # Pods for FanfouExpress
   pod 'Alamofire', '~> 4.4'
+  pod 'DTCoreText'
   pod 'Reveal-SDK', :configurations => ['Debug']
 
   target 'FanfouExpressTests' do
