@@ -62,10 +62,10 @@ extension DetailsViewController {
         
         switch indexPath.row {
         case 0:
-            return 200
+            return DetailHeaderCell.height(forWidth: view.bounds.width)
         case 1:
-            let width = view.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right
-            return TimelineTableViewCell.height(forMessage: msg, forWidth: width)
+            let width = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
+            return TimelineTableViewCell.height(forMessage: msg, forWidth: width, forContentInsets: DetailCellStyle.ContentInsets)
         default:
             return 0
         }
@@ -111,6 +111,7 @@ private extension DetailsViewController {
         
         let contentCell = TimelineTableViewCell(style: .default, reuseIdentifier: nil)
         contentCell.textDelegate = self
+        contentCell.contentInsets = DetailCellStyle.ContentInsets
         contentCell.updateCell(msg)
         
         dataArray = [headerCell, contentCell]

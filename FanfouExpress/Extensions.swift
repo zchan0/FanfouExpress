@@ -44,26 +44,6 @@ extension UIFont {
     }
 }
 
-extension UIDevice {
-    
-    // http://stackoverflow.com/a/12991955
-    class func statusBarHeight() -> CGFloat {
-        switch UIApplication.shared.statusBarOrientation {
-        case UIInterfaceOrientation.portrait, UIInterfaceOrientation.portraitUpsideDown:
-            return UIApplication.shared.statusBarFrame.height
-        case UIInterfaceOrientation.landscapeLeft, UIInterfaceOrientation.landscapeRight:
-            return UIApplication.shared.statusBarFrame.width
-        case UIInterfaceOrientation.unknown:
-            print("Something wrong with statusBar height")
-            return 0
-        }
-    }
-    
-    class func navigationBarHeight() -> CGFloat {
-        return 64
-    }
-}
-
 extension UIImageView {
     
     func setImage(withURL URL: URL) {

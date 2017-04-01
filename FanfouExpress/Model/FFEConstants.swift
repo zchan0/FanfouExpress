@@ -19,7 +19,7 @@ struct Constants {
 }
 
 struct FFEColor {
-    static let PrimaryColor = UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)
+    static let PrimaryColor = UIColor(red: 64 / 255, green: 64 / 255, blue: 64 / 255, alpha: 1)
     static let AccentColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1)
 }
 
@@ -50,15 +50,15 @@ struct CellStyle {
 struct DetailCellStyle {
     
     // Font
-    static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 60)!
+    static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 50)!
     
     // Spacing
-    static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 10, right: 20)
+    static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 20, right: 25)
 
     // header spacing
     static let AvatarVerticalMargin: CGFloat = 30   // margin between avatarImageView and buttons above it
     static let QuotationVerticalMargin: CGFloat = 8    // margin beween quotationLabel and avatarImageView
-    static let QuotationHorizontalPadding: CGFloat = 8
+    static let QuotationHorizontalPadding: CGFloat = 20
     
     // Image
     static let AvatarHeight: CGFloat = 96

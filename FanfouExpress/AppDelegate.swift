@@ -20,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let controller = TimelineViewController()
+        let controller = TimelineViewController(style: .plain)
         let navigationController = UINavigationController(rootViewController: controller)
-        navigationController.setNavigationBarHidden(true, animated: false)
         window?.rootViewController = navigationController
         
         return true

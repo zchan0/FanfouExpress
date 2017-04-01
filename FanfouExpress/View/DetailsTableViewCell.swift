@@ -61,5 +61,10 @@ class DetailHeaderCell: UITableViewCell {
     func updateCell(withAvatar avatarURL: URL) {
         avatarImageView.setImage(withURL: avatarURL)
     }
+    
+    class func height(forWidth width: CGFloat) -> CGFloat {
+        let quotationHeight = "“".height(forFont: DetailCellStyle.QuotationFont, forWidth: width)
+        return DetailCellStyle.AvatarVerticalMargin + DetailCellStyle.AvatarHeight + DetailCellStyle.QuotationVerticalMargin + quotationHeight
+    }
 }
 
