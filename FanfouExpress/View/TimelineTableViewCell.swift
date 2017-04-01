@@ -17,6 +17,13 @@ class TimelineTableViewCell: UITableViewCell {
             contentLabel.delegate = textDelegate
         }
     }
+    
+    /// default value is CellStyle.ContentInsets
+    var contentInsets: UIEdgeInsets {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     private var contentLabel: DTAttributedLabel
     private var screenNameLabel: UILabel
@@ -26,6 +33,7 @@ class TimelineTableViewCell: UITableViewCell {
         self.contentLabel = DTAttributedLabel()
         self.screenNameLabel = UILabel()
         self.previewImageView = UIImageView()
+        self.contentInsets = CellStyle.ContentInsets
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentLabel.numberOfLines = 0
@@ -52,28 +60,28 @@ class TimelineTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let contentSize = CGSize(width: contentView.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right,
-                                 height: contentView.bounds.height - CellStyle.ContentInsets.top - CellStyle.ContentInsets.bottom)
+        let contentSize = CGSize(width: contentView.bounds.width - contentInsets.left - contentInsets.right,
+                                 height: contentView.bounds.height - contentInsets.top - contentInsets.bottom)
         let contentWidth = contentSize.width
         
         contentLabel.frame = {
-            let height = contentLabel.attributedString.height(forOrigin: CGPoint(x: CellStyle.ContentInsets.left, y: CellStyle.ContentInsets.top),
+            let height = contentLabel.attributedString.height(forOrigin: CGPoint(x: contentInsets.left, y: contentInsets.top),
                                                               forWidth: contentWidth)
-            let frame = CGRect(origin: CGPoint(x: CellStyle.ContentInsets.left, y: CellStyle.ContentInsets.top),
+            let frame = CGRect(origin: CGPoint(x: contentInsets.left, y: contentInsets.top),
                                size: CGSize(width: contentWidth, height: height))
             return frame
         }()
         
         if previewImageView.isHidden == false {
             previewImageView.frame = {
-                return CGRect(origin: CGPoint(x: CellStyle.ContentInsets.left, y: contentLabel.frame.maxY + CellStyle.ContentVerticalMargin),
+                return CGRect(origin: CGPoint(x: contentInsets.left, y: contentLabel.frame.maxY + CellStyle.ContentVerticalMargin),
                                    size: CGSize(width: contentWidth, height: CellStyle.ImageHeight))
             }()
         }
         
         screenNameLabel.frame = {
             let size = screenNameLabel.sizeThatFits(contentSize)
-            let frame = CGRect(origin: CGPoint(x: CellStyle.ContentInsets.left,
+            let frame = CGRect(origin: CGPoint(x: contentInsets.left,
                                                y: previewImageView.isHidden ? contentLabel.frame.maxY + CellStyle.ContentVerticalMargin : previewImageView.frame.maxY + CellStyle.PreviewVerticalMargin),
                                size: CGSize(width: contentWidth, height: size.height))
             return frame
@@ -103,7 +111,13 @@ class TimelineTableViewCell: UITableViewCell {
         }
     }
     
-    class func height(forMessage msg: Message, forWidth width: CGFloat) -> CGFloat {
+    /// Calculate height for TimelineTableViewCell
+    ///
+    /// - Parameters:
+    ///   - msg: message
+    ///   - width: excluding contentInsets.left and contentInsets.right
+    ///   - contentInsets: default parameter is CellStyle.ContentInsets
+    class func height(forMessage msg: Message, forWidth width: CGFloat, forContentInsets contentInsets: UIEdgeInsets = CellStyle.ContentInsets) -> CGFloat {
         guard let attributedContent = NSAttributedString(htmlData: msg.content.data(using: .utf8), options: CellStyle.ContentAttributes, documentAttributes: nil) else {
             print("Failed to convert \(msg.content) to attributed string with \(CellStyle.ContentAttributes)")
             return 0
@@ -112,14 +126,14 @@ class TimelineTableViewCell: UITableViewCell {
         let screenNameHeight = msg.realName.height(forFont: CellStyle.ScreenNameFont, forWidth: width)
         let imageHeight = (msg.image == nil) ? 0 : CellStyle.ImageHeight + CellStyle.PreviewVerticalMargin
         
-        let contentHeight = attributedContent.height(forOrigin: CGPoint(x: CellStyle.ContentInsets.left, y: CellStyle.ContentInsets.top),
+        let contentHeight = attributedContent.height(forOrigin: CGPoint(x: contentInsets.left, y: contentInsets.top),
                                                      forWidth: width)
         
-        return CellStyle.ContentInsets.top
+        return contentInsets.top
             + contentHeight + CellStyle.ContentVerticalMargin
             + screenNameHeight
             + imageHeight
-            + CellStyle.ContentInsets.bottom
+            + contentInsets.bottom
     }
 }
 
