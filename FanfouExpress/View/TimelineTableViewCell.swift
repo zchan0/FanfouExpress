@@ -11,6 +11,12 @@ import UIKit
 import DTCoreText
 
 class TimelineTableViewCell: UITableViewCell {
+    
+    var textDelegate: DTAttributedTextContentViewDelegate? {
+        didSet {
+            contentLabel.delegate = textDelegate
+        }
+    }
 
     private var contentLabel: DTAttributedLabel
     private var screenNameLabel: UILabel
@@ -83,7 +89,9 @@ class TimelineTableViewCell: UITableViewCell {
         previewImageView.isHidden = true
     }
     
-    func updateContentWith(_ msg: Message) {
+// - MARK: 
+    
+    func updateCell(_ msg: Message) {
         screenNameLabel.text = "—— \(msg.realName)"
         
         let attributedContent = NSAttributedString(htmlData: msg.content.data(using: .utf8), options: CellStyle.ContentAttributes, documentAttributes: nil)
@@ -93,6 +101,25 @@ class TimelineTableViewCell: UITableViewCell {
             previewImageView.isHidden = false
             previewImageView.setImage(withURL: imageURL)
         }
+    }
+    
+    class func height(forMessage msg: Message, forWidth width: CGFloat) -> CGFloat {
+        guard let attributedContent = NSAttributedString(htmlData: msg.content.data(using: .utf8), options: CellStyle.ContentAttributes, documentAttributes: nil) else {
+            print("Failed to convert \(msg.content) to attributed string with \(CellStyle.ContentAttributes)")
+            return 0
+        }
+        
+        let screenNameHeight = msg.realName.height(forFont: CellStyle.ScreenNameFont, forWidth: width)
+        let imageHeight = (msg.image == nil) ? 0 : CellStyle.ImageHeight + CellStyle.PreviewVerticalMargin
+        
+        let contentHeight = attributedContent.height(forOrigin: CGPoint(x: CellStyle.ContentInsets.left, y: CellStyle.ContentInsets.top),
+                                                     forWidth: width)
+        
+        return CellStyle.ContentInsets.top
+            + contentHeight + CellStyle.ContentVerticalMargin
+            + screenNameHeight
+            + imageHeight
+            + CellStyle.ContentInsets.bottom
     }
 }
 

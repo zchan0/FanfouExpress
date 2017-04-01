@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DTCoreText
 
 class DetailsViewController: UITableViewController {
     
@@ -32,19 +33,7 @@ class DetailsViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
         
-        guard let msg = msg else {
-            return
-        }
-        
-        let headerCell = DetailHeaderCell(style: .default, reuseIdentifier: nil)
-        headerCell.updateCell(withAvatar: msg.avatarURL)
-        
-        let contentCell = DetailContentCell(style: .default, reuseIdentifier: nil)
-        contentCell.updateCell(withContent: msg.content, withImage: msg.image?.previewURL)
-        
-        let footerCell = DetailFooterCell(realName: msg.realName)
-        
-        dataArray = [headerCell, contentCell, footerCell]
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +51,7 @@ extension DetailsViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -74,13 +63,8 @@ extension DetailsViewController {
         case 0:
             return 200
         case 1:
-            let font = msg.image == nil ? DetailCellStyle.ContentFontWithoutImage : DetailCellStyle.ContentFontWithImage
-            let contentWidth = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
-            let contentHeight = msg.content.height(forFont: font, forWidth: contentWidth)
-            return DetailCellStyle.ContentInsets.top + contentHeight + DetailCellStyle.ContentVerticalMargin + (msg.image == nil ? 0 : DetailCellStyle.ImageHeight)
-        case 2:
-            let contentWidth = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
-            return msg.realName.height(forFont: DetailCellStyle.ScreenNameFont, forWidth: contentWidth)
+            let width = view.bounds.width - CellStyle.ContentInsets.left - CellStyle.ContentInsets.right
+            return TimelineTableViewCell.height(forMessage: msg, forWidth: width)
         default:
             return 0
         }
@@ -91,12 +75,39 @@ extension DetailsViewController {
     }
 }
 
-// MARK: - 
+// MARK: - DTAttributedTextContentViewDelegate
+
+extension DetailsViewController: DTAttributedTextContentViewDelegate {
+    
+    func attributedTextContentView(_ attributedTextContentView: DTAttributedTextContentView!, viewForLink url: URL!, identifier: String!, frame: CGRect) -> UIView! {
+        let linkButton = DTLinkButton(frame: frame)
+        linkButton.url = url
+        linkButton.addTarget(self, action: #selector(pressedLinkButton), for: .touchUpInside)
+        return linkButton
+    }
+}
+
+// MARK: - Private methods
 
 private extension DetailsViewController {
     
+    func loadData() {
+        guard let msg = msg else {
+            return
+        }
+        
+        let headerCell = DetailHeaderCell(style: .default, reuseIdentifier: nil)
+        headerCell.updateCell(withAvatar: msg.avatarURL)
+        
+        let contentCell = TimelineTableViewCell(style: .default, reuseIdentifier: nil)
+        contentCell.textDelegate = self
+        contentCell.updateCell(msg)
+        
+        dataArray = [headerCell, contentCell]
+    }
+    
     func configNavigationBar() {
-        // UI
+        navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -112,6 +123,8 @@ private extension DetailsViewController {
         shareButton.tintColor = FFEColor.PrimaryColor
         navigationItem.rightBarButtonItems = [spacer, shareButton]
     }
+
+    // MARK: -
     
     @objc func pressDoneButton() {
         dismiss(animated: true, completion: nil)
@@ -119,6 +132,10 @@ private extension DetailsViewController {
     
     @objc func pressedShareButton() {
         
+    }
+    
+    @objc func pressedLinkButton(sender: DTLinkButton) {
+        print(sender.url.absoluteString)
     }
 }
 
