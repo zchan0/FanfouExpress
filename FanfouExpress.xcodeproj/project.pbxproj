@@ -14,7 +14,6 @@
 		8B234A3A1E86D2DC008DC5AA /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */; };
 		8B234A3D1E873848008DC5AA /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A3C1E873848008DC5AA /* TimelineViewController.swift */; };
 		8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234ABC1E88027D008DC5AA /* Extensions.swift */; };
-		8B234AC31E88BC0B008DC5AA /* TimelineNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234AC21E88BC0B008DC5AA /* TimelineNavigationBar.swift */; };
 		8B7C50181E8E20FB004F4CFE /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C50171E8E20FB004F4CFE /* DetailsTableViewCell.swift */; };
 		8B88B3B11E8C5DAD00017686 /* STKaiti.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B88B3B01E8C5DAD00017686 /* STKaiti.ttf */; };
 		8B9FB7181E85ABF200DD2090 /* FFEConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */; };
@@ -53,7 +52,6 @@
 		8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineTableViewCell.swift; path = View/TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		8B234A3C1E873848008DC5AA /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = Controllers/TimelineViewController.swift; sourceTree = "<group>"; };
 		8B234ABC1E88027D008DC5AA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		8B234AC21E88BC0B008DC5AA /* TimelineNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineNavigationBar.swift; path = View/TimelineNavigationBar.swift; sourceTree = "<group>"; };
 		8B7C50171E8E20FB004F4CFE /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsTableViewCell.swift; path = View/DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8B88B3B01E8C5DAD00017686 /* STKaiti.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = STKaiti.ttf; sourceTree = "<group>"; };
 		8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FFEConstants.swift; path = Model/FFEConstants.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */,
-				8B234AC21E88BC0B008DC5AA /* TimelineNavigationBar.swift */,
 				8B7C50171E8E20FB004F4CFE /* DetailsTableViewCell.swift */,
 			);
 			name = View;
@@ -518,7 +515,6 @@
 			files = (
 				8B234A3A1E86D2DC008DC5AA /* TimelineTableViewCell.swift in Sources */,
 				8BBA8EB11E849A7000D505FA /* Message.swift in Sources */,
-				8B234AC31E88BC0B008DC5AA /* TimelineNavigationBar.swift in Sources */,
 				8BBA8EB31E84A6B600D505FA /* Router.swift in Sources */,
 				8BD3C6511E84912D0061455A /* AppDelegate.swift in Sources */,
 				8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */,

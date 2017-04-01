@@ -19,7 +19,7 @@ struct Constants {
 }
 
 struct FFEColor {
-    static let PrimaryColor = UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)
+    static let PrimaryColor = UIColor(red: 64 / 255, green: 64 / 255, blue: 64 / 255, alpha: 1)
     static let AccentColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1)
 }
 
@@ -50,7 +50,7 @@ struct CellStyle {
 struct DetailCellStyle {
     
     // Font
-    static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 60)!
+    static let QuotationFont: UIFont  = UIFont(name: "Arial Rounded MT Bold", size: 50)!
     
     // Spacing
     static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 10, right: 20)

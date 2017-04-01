@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 
-class TimelineViewController: UIViewController {
+class TimelineViewController: UITableViewController {
     
     var digest: Digest?
     var today: String {
@@ -21,21 +21,20 @@ class TimelineViewController: UIViewController {
         }
     }
     
-    private var tableView: UITableView
-    private var navigationBar: TimelineNavigationbar
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        tableView = UITableView(frame: .zero, style: .plain)
-        navigationBar = TimelineNavigationbar()
-        super.init(nibName: nil, bundle: nil)
+    override init(style: UITableViewStyle) {
+        super.init(style: style)
     }
-    
+        
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configNavigationBar()
+        
+        view.backgroundColor = UIColor.clear
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -44,40 +43,24 @@ class TimelineViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TimelineTableViewCell.self)
         
-        let offsetY = UIDevice.navigationBarHeight() - UIDevice.statusBarHeight()
-        tableView.contentOffset = CGPoint(x: 0, y: -offsetY)
-        tableView.contentInset  = UIEdgeInsetsMake(offsetY, 0, 0, 0)
-        
-        navigationBar.title = "每日精选"
-        
-        view.addSubview(tableView)
-        view.addSubview(navigationBar)
-        
         fetchDigest({
             self.tableView.reloadData()
         })
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        navigationBar.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: view.bounds.width, height: UIDevice.navigationBarHeight()))
-        tableView.frame = view.bounds
     }
 }
 
 // MARK: - TableView
 
-extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension TimelineViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return digest?.msgs.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let msgs = digest?.msgs else {
             print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return 0
@@ -89,7 +72,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
         return TimelineTableViewCell.height(forMessage: msg, forWidth: width)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let msgs = digest?.msgs else {
             print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return UITableViewCell()
@@ -102,7 +85,7 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let msgs = digest?.msgs else {
             print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return
@@ -117,6 +100,17 @@ extension TimelineViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 private extension TimelineViewController {
+    
+    func configNavigationBar() {
+        title = "每日精选"
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSFontAttributeName : NavigationBarAppearance.TitleFont,
+        ]
+        
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.isTranslucent = false
+    }
     
     func fetchDigest(_ completionHandler: @escaping () -> Void) {
         let router = Router.fetchDailyDigests(date: today)
