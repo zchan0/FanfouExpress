@@ -40,6 +40,7 @@ class TimelineViewController: UITableViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.backgroundColor = UIColor.white
+        tableView.tableFooterView = UIView()
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TimelineTableViewCell.self)
         
@@ -114,7 +115,13 @@ private extension TimelineViewController {
     
     func fetchDigest(_ completionHandler: @escaping () -> Void) {
         let router = Router.fetchDailyDigests(date: today)
+        
+        startLoading()
+        
         Alamofire.request(router).validate().responseJSON { (response) in
+            
+            self.stopLoading()
+            
             switch response.result {
             case .success:
                 guard let json = response.value as? JSON else { return }

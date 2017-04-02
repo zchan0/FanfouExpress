@@ -32,6 +32,7 @@ struct CellStyle {
         DTDefaultFontName : Constants.DefaultFontName,
         DTDefaultFontSize : CellStyle.ContentSize,
         DTDefaultLinkColor : FFEColor.AccentColor,
+        DTDefaultLineHeightMultiplier : 1.2,
         DTDefaultLinkDecoration : false
     ] as [String : Any]
 
