@@ -16,6 +16,8 @@ struct Constants {
     static let DefaultFontName = "STKaiti"
     static let HTTPScheme  = "http"
     static let HTTPSScheme = "https"
+    
+    static let StartDate = "2015-10-05"
 }
 
 struct FFEColor {

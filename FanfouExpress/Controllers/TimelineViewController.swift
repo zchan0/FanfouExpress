@@ -15,9 +15,7 @@ class TimelineViewController: UITableViewController {
     var digest: Digest?
     var today: String {
         get {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            return formatter.string(from: Date())
+            return DateUtils.dateFormatter.string(from: Date())
         }
     }
     
@@ -44,9 +42,29 @@ class TimelineViewController: UITableViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TimelineTableViewCell.self)
         
-        fetchDigest({
+        fetchDigest(today, {
             self.tableView.reloadData()
         })
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            guard
+                let startDate = DateUtils.dateFormatter.date(from: Constants.StartDate),
+                let randomDate = DateUtils.shared.randomDay(startDate, Date())
+            else { return }
+            
+            let randomDateString = DateUtils.dateFormatter.string(from: randomDate)
+            fetchDigest(randomDateString, { [weak self, randomDate] in
+                guard let `self` = self else { return }
+                self.title = DateUtils.chineseDateFormatter.string(from: randomDate)
+                self.tableView.reloadData()
+            })
+        }
     }
 }
 
@@ -113,8 +131,8 @@ private extension TimelineViewController {
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    func fetchDigest(_ completionHandler: @escaping () -> Void) {
-        let router = Router.fetchDailyDigests(date: today)
+    func fetchDigest(_ date: String, _ completionHandler: @escaping () -> Void) {
+        let router = Router.fetchDailyDigests(date: date)
         
         startLoading()
         
