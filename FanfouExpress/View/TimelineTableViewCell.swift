@@ -24,6 +24,20 @@ class TimelineTableViewCell: UITableViewCell {
             setNeedsLayout()
         }
     }
+    
+    
+    /// including content + screen name
+    var parsedContent: String {
+        get {
+            return "\(contentLabel.attributedString.string)" + "\(screenNameLabel.text!)"
+        }
+    }
+    
+    var previewImage: UIImage? {
+        get {
+            return previewImageView.image
+        }
+    }
 
     private var contentLabel: DTAttributedLabel
     private var screenNameLabel: UILabel

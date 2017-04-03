@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import DTCoreText
+import SVProgressHUD
 
 extension String {
     
@@ -74,5 +75,21 @@ extension UITableView {
             return T.init()
         }
         return cell
+    }
+}
+
+extension UIViewController {
+    
+    func startLoading() {
+        startLoading(withStatus: "Loading..")
+    }
+    
+    func startLoading(withStatus status: String) {
+        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.show(withStatus: status)
+    }
+    
+    func stopLoading() {
+        SVProgressHUD.dismiss()
     }
 }

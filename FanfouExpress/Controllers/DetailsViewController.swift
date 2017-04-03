@@ -12,6 +12,12 @@ import SafariServices
 
 class DetailsViewController: UITableViewController {
     
+    enum RowType: Int {
+        case Header  = 0
+        case Content
+        case Unknown
+    }
+    
     var msg: Message?
     var dataArray: [UITableViewCell]
     
@@ -47,12 +53,13 @@ class DetailsViewController: UITableViewController {
 // MARK: - TableView Delegate
 
 extension DetailsViewController {
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return dataArray.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -61,9 +68,9 @@ extension DetailsViewController {
         }
         
         switch indexPath.row {
-        case 0:
+        case RowType.Header.rawValue:
             return DetailHeaderCell.height(forWidth: view.bounds.width)
-        case 1:
+        case RowType.Content.rawValue:
             let width = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
             return TimelineTableViewCell.height(forMessage: msg, forWidth: width, forContentInsets: DetailCellStyle.ContentInsets)
         default:
@@ -142,7 +149,29 @@ private extension DetailsViewController {
     }
     
     @objc func pressedShareButton() {
+        guard
+            let msg = msg,
+            let contentCell = dataArray[RowType.Content.rawValue] as? TimelineTableViewCell
+        else { return }
         
+        var activityItems:[Any] = [contentCell.parsedContent]
+        
+        if let statusURL = msg.statusURL {
+            activityItems.append(statusURL)
+        }
+        if  let image = contentCell.previewImage {
+            activityItems.append(image)
+        }
+        
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        controller.completionWithItemsHandler = { (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, activityError: Error?) in
+            if completed {
+                print("[UIActivityViewController]: Succeed")
+            } else {
+                print(activityError?.localizedDescription ?? "[UIActivityViewController]: Failed")
+            }
+        }
+        present(controller, animated: true, completion: nil)
     }
     
     @objc func pressedLinkButton(sender: DTLinkButton) {
