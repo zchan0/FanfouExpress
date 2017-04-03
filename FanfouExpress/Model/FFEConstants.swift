@@ -88,6 +88,7 @@ extension Message {
     
     struct Constants {
         static let EmptyAvatar = "http://s3.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/avatar/l0/00/00/00.jpg"
+        static let StatusBaseUrl = "http://fanfou.com/statuses"
     }
     
     struct JSONResponseKeys {

@@ -20,6 +20,12 @@ struct Message {
     let content: String
     let image: Image?
     
+    var statusURL: URL? {
+        get {
+            return URL(string: "\(Constants.StatusBaseUrl)" + "/\(statusID)")
+        }
+    }
+    
     var description: String {
         return "Message: { id: \(identifier), count: \(count), realname: \(realName), loginname: \(loginName), avatar: \(avatarURL), time: \(time), statusid: \(statusID), content: \(content), \(image?.description ?? "") }"
     }
