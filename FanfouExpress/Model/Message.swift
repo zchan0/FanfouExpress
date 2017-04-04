@@ -21,16 +21,14 @@ struct Message {
     let image: Image?
     
     var statusURL: URL? {
-        get {
-            return URL(string: "\(Constants.StatusBaseUrl)" + "/\(statusID)")
-        }
+        return URL(string: "\(Constants.StatusBaseUrl)" + "/\(statusID)")
     }
     
     var description: String {
         return "Message: { id: \(identifier), count: \(count), realname: \(realName), loginname: \(loginName), avatar: \(avatarURL), time: \(time), statusid: \(statusID), content: \(content), \(image?.description ?? "") }"
     }
     
-    init?(json: Dictionary<String, Any>) {
+    init?(json: JSON) {
         guard let identifier = json[JSONResponseKeys.Identifier] as? String else { return nil }
         guard let count = json[JSONResponseKeys.Count] as? String else { return nil }
         guard let realName  = json[JSONResponseKeys.Realname] as? String else { return nil }
@@ -50,7 +48,7 @@ struct Message {
         self.count = Int(count) ?? 0
         self.avatarURL = URL(string: avatarUrl.replacingOccurrences(of: "/s0/", with: "/l0/")) ?? URL(string: Constants.EmptyAvatar)!
         
-        if let image = json[JSONResponseKeys.Image] as? [String : String] {
+        if let image = json[JSONResponseKeys.Image] as? [String: String] {
             self.image = Image(json: image)
         } else {
             self.image = nil
@@ -66,7 +64,7 @@ struct Image {
         return "Image: { preview: \(previewURL.absoluteString), page: \(pageURL.absoluteString) }"
     }
     
-    init?(json: Dictionary<String, String>) {
+    init?(json: [String: String]) {
         guard let pageUrl = json[JSONResponseKeys.Page], pageUrl.isEmpty == false else { return nil }
         guard let previewUrl = json[JSONResponseKeys.Preview], previewUrl.isEmpty == false else { return nil }
         

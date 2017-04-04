@@ -31,12 +31,12 @@ struct CellStyle {
     static let ContentSize: CGFloat = 24
     static let ContentFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ContentSize)
     static let ContentAttributes = [
-        DTDefaultFontName : Constants.DefaultFontName,
-        DTDefaultFontSize : CellStyle.ContentSize,
-        DTDefaultLinkColor : FFEColor.AccentColor,
-        DTDefaultLineHeightMultiplier : 1.2,
-        DTDefaultLinkDecoration : false
-    ] as [String : Any]
+        DTDefaultFontName: Constants.DefaultFontName,
+        DTDefaultFontSize: CellStyle.ContentSize,
+        DTDefaultLinkColor: FFEColor.AccentColor,
+        DTDefaultLineHeightMultiplier: 1.2,
+        DTDefaultLinkDecoration: false
+    ] as [String: Any]
 
     static let ScreenNameSize: CGFloat = 17
     static let ScreenNameFont: UIFont = UIFont.defaultFont(ofSize: CellStyle.ScreenNameSize)
@@ -73,8 +73,6 @@ struct NavigationBarAppearance {
     static let TitleSize: CGFloat = 19
     static let TitleFont: UIFont = UIFont.defaultFont(ofSize: NavigationBarAppearance.TitleSize)
 }
-
-// - MARK:
 
 extension Digest {
     

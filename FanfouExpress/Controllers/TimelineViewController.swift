@@ -14,9 +14,7 @@ class TimelineViewController: UITableViewController {
     
     var digest: Digest?
     var today: String {
-        get {
-            return DateUtils.dateFormatter.string(from: Date())
-        }
+        return DateUtils.dateFormatter.string(from: Date())
     }
     
     override init(style: UITableViewStyle) {
@@ -122,7 +120,7 @@ private extension TimelineViewController {
         title = "每日精选"
         
         navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName : NavigationBarAppearance.TitleFont,
+            NSFontAttributeName: NavigationBarAppearance.TitleFont
         ]
         
         navigationController?.hidesBarsOnSwipe = true

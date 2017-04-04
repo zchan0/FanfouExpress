@@ -13,9 +13,9 @@ import SafariServices
 class DetailsViewController: UITableViewController {
     
     enum RowType: Int {
-        case Header  = 0
-        case Content
-        case Unknown
+        case header  = 0
+        case content
+        case unknown
     }
     
     var msg: Message?
@@ -68,9 +68,9 @@ extension DetailsViewController {
         }
         
         switch indexPath.row {
-        case RowType.Header.rawValue:
+        case RowType.header.rawValue:
             return DetailHeaderCell.height(forWidth: view.bounds.width)
-        case RowType.Content.rawValue:
+        case RowType.content.rawValue:
             let width = view.bounds.width - DetailCellStyle.ContentInsets.left - DetailCellStyle.ContentInsets.right
             return TimelineTableViewCell.height(forMessage: msg, forWidth: width, forContentInsets: DetailCellStyle.ContentInsets)
         default:
@@ -150,7 +150,7 @@ private extension DetailsViewController {
     
     @objc func pressedShareButton() {
         guard let msg = msg else { return }
-        guard let contentCell = dataArray[RowType.Content.rawValue] as? TimelineTableViewCell else { return }
+        guard let contentCell = dataArray[RowType.content.rawValue] as? TimelineTableViewCell else { return }
         
         var activityItems:[Any] = [contentCell.parsedContent]
         

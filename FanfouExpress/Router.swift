@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 enum Shift: String {
-    case Daily = "daily"
-    case Weekly = "weekly"
+    case daily
+    case weekly
 }
 
 enum Router: URLRequestConvertible {
@@ -22,15 +22,13 @@ enum Router: URLRequestConvertible {
     static let baseUrl = "http://blog.fanfou.com/digest/json"
     
     var path: String {
-        get {
-            switch self {
-            case .fetchDigests(let shift, let date):
-                return "/\(date).\(shift.rawValue).json"
-            case .fetchDailyDigests(let date):
-                return "/\(date).\(Shift.Daily.rawValue).json"
-            case .fetchWeeklyDigest(let date):
-                return "/\(date).\(Shift.Weekly.rawValue).json"
-            }
+        switch self {
+        case .fetchDigests(let shift, let date):
+            return "/\(date).\(shift.rawValue).json"
+        case .fetchDailyDigests(let date):
+            return "/\(date).\(Shift.daily.rawValue).json"
+        case .fetchWeeklyDigest(let date):
+            return "/\(date).\(Shift.weekly.rawValue).json"
         }
     }
     
