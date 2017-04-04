@@ -247,6 +247,7 @@
 				8BD3C64B1E84912C0061455A /* Resources */,
 				636953C43A20C1CF7E16C50C /* [CP] Embed Pods Frameworks */,
 				9EDC29D2776E82A4F50D1ADF /* [CP] Copy Pods Resources */,
+				8B87F90B1E934B43005B20AF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -448,6 +449,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8B87F90B1E934B43005B20AF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		9EDC29D2776E82A4F50D1ADF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
