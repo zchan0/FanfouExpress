@@ -21,15 +21,10 @@ struct Digest {
     }
     
     init?(json: Dictionary<String, Any>) {
-        guard
-            let shift = json[JSONResponseKeys.Shift] as? String,
-            let shiftCN = json[JSONResponseKeys.ShiftCN] as? String,
-            let date = json[JSONResponseKeys.Date] as? String,
-            let msgs = json[JSONResponseKeys.Messages] as? Array<Any>
-        else {
-            print("Failed to init Digest")
-            return nil
-        }
+        guard let shift = json[JSONResponseKeys.Shift] as? String else { return nil }
+        guard let shiftCN = json[JSONResponseKeys.ShiftCN] as? String else { return nil }
+        guard let date = json[JSONResponseKeys.Date] as? String else { return nil }
+        guard let msgs = json[JSONResponseKeys.Messages] as? Array<Any> else { return nil }
         
         self.shift = shift
         self.shiftCN = shiftCN

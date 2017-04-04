@@ -149,10 +149,8 @@ private extension DetailsViewController {
     }
     
     @objc func pressedShareButton() {
-        guard
-            let msg = msg,
-            let contentCell = dataArray[RowType.Content.rawValue] as? TimelineTableViewCell
-        else { return }
+        guard let msg = msg else { return }
+        guard let contentCell = dataArray[RowType.Content.rawValue] as? TimelineTableViewCell else { return }
         
         var activityItems:[Any] = [contentCell.parsedContent]
         

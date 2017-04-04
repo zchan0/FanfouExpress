@@ -28,7 +28,7 @@ extension NSAttributedString {
             print("Failed to init layouter with \(self)")
             return 0
         }
-        
+        // swiftlint:disable legacy_constructor
         let layoutFrame: DTCoreTextLayoutFrame = layouter.layoutFrame(with: CGRect(origin: origin, size: CGSize(width: width, height: CGFloat(CGFLOAT_HEIGHT_UNKNOWN))),
                                                                       range: NSMakeRange(0, self.length))
         return layoutFrame.frame.height
@@ -61,8 +61,8 @@ extension UIImageView {
 
 extension UITableView {
     
-    private func reuseIdentifier(ofClass T: AnyClass) -> String {
-         return String(describing: T)
+    private func reuseIdentifier(ofClass aClass: AnyClass) -> String {
+         return String(describing: aClass)
     }
     
     func register<T: UITableViewCell>(_ : T.Type) {

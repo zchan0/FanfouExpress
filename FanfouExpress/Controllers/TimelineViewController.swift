@@ -53,10 +53,8 @@ class TimelineViewController: UITableViewController {
     
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            guard
-                let startDate = DateUtils.dateFormatter.date(from: Constants.StartDate),
-                let randomDate = DateUtils.shared.randomDay(startDate, Date())
-            else { return }
+            guard let startDate  = DateUtils.dateFormatter.date(from: Constants.StartDate) else { return }
+            guard let randomDate = DateUtils.shared.randomDay(startDate, Date()) else { return }
             
             let randomDateString = DateUtils.dateFormatter.string(from: randomDate)
             fetchDigest(randomDateString, { [weak self, randomDate] in
