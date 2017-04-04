@@ -20,22 +20,17 @@ struct Digest {
         return "Digest: { \(desc), \(messagesDesc) }"
     }
     
-    init?(json: Dictionary<String, Any>) {
-        guard
-            let shift = json[JSONResponseKeys.Shift] as? String,
-            let shiftCN = json[JSONResponseKeys.ShiftCN] as? String,
-            let date = json[JSONResponseKeys.Date] as? String,
-            let msgs = json[JSONResponseKeys.Messages] as? Array<Any>
-        else {
-            print("Failed to init Digest")
-            return nil
-        }
+    init?(json: JSON) {
+        guard let shift = json[JSONResponseKeys.Shift] as? String else { return nil }
+        guard let shiftCN = json[JSONResponseKeys.ShiftCN] as? String else { return nil }
+        guard let date = json[JSONResponseKeys.Date] as? String else { return nil }
+        guard let msgs = json[JSONResponseKeys.Messages] as? [Any] else { return nil }
         
         self.shift = shift
         self.shiftCN = shiftCN
         self.date = date
         self.msgs = msgs.flatMap({
-            if let msgDict = $0 as? [String : Any] {
+            if let msgDict = $0 as? JSON {
                 return Message(json: msgDict)
             }
             return nil

@@ -10,6 +10,7 @@
 		3E5691735C98F8AB9EAEFA91 /* Pods_FanfouExpressTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39DA2307EFC0987BDCE410F /* Pods_FanfouExpressTests.framework */; };
 		5FA1A0479C41C9D6C6727968 /* Pods_FanfouExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */; };
 		7FC4302DC8A33409E0CA805B /* Pods_FanfouExpressUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */; };
+		8B04F6D71E921CCA0079EED6 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04F6D61E921CCA0079EED6 /* Helpers.swift */; };
 		8B15823B1E8D98E300A8267B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B15823A1E8D98E300A8267B /* DetailsViewController.swift */; };
 		8B234A3A1E86D2DC008DC5AA /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */; };
 		8B234A3D1E873848008DC5AA /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A3C1E873848008DC5AA /* TimelineViewController.swift */; };
@@ -48,6 +49,7 @@
 		1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpressUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47D360653A542CEA5869F63A /* Pods-FanfouExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.release.xcconfig"; sourceTree = "<group>"; };
+		8B04F6D61E921CCA0079EED6 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		8B15823A1E8D98E300A8267B /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = Controllers/DetailsViewController.swift; sourceTree = "<group>"; };
 		8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineTableViewCell.swift; path = View/TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		8B234A3C1E873848008DC5AA /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = Controllers/TimelineViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				8BD3C6501E84912D0061455A /* AppDelegate.swift */,
 				8BBA8EB21E84A6B600D505FA /* Router.swift */,
+				8B04F6D61E921CCA0079EED6 /* Helpers.swift */,
 				8B234ABC1E88027D008DC5AA /* Extensions.swift */,
 				8BBA8EAF1E8492A600D505FA /* Model */,
 				8B234A3B1E86D2E0008DC5AA /* View */,
@@ -244,6 +247,7 @@
 				8BD3C64B1E84912C0061455A /* Resources */,
 				636953C43A20C1CF7E16C50C /* [CP] Embed Pods Frameworks */,
 				9EDC29D2776E82A4F50D1ADF /* [CP] Copy Pods Resources */,
+				8B87F90B1E934B43005B20AF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -446,6 +450,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8B87F90B1E934B43005B20AF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		9EDC29D2776E82A4F50D1ADF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -517,6 +534,7 @@
 				8BBA8EB11E849A7000D505FA /* Message.swift in Sources */,
 				8BBA8EB31E84A6B600D505FA /* Router.swift in Sources */,
 				8BD3C6511E84912D0061455A /* AppDelegate.swift in Sources */,
+				8B04F6D71E921CCA0079EED6 /* Helpers.swift in Sources */,
 				8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */,
 				8B7C50181E8E20FB004F4CFE /* DetailsTableViewCell.swift in Sources */,
 				8B234A3D1E873848008DC5AA /* TimelineViewController.swift in Sources */,
@@ -698,6 +716,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FanfouExpressTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = space.minesecret.FanfouExpressTests;
@@ -713,6 +732,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FanfouExpressTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = space.minesecret.FanfouExpressTests;

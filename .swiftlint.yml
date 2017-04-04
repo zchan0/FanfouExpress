@@ -1,0 +1,8 @@
+disabled_rules: # rule identifiers to exclude from running
+  - trailing_newline
+  - trailing_whitespace
+  - line_length
+  # Find all the available rules by running:
+  # swiftlint rules
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
