@@ -17,7 +17,7 @@ PODS:
     - DTFoundation/Core
   - DTFoundation/UIKit (1.7.12):
     - DTFoundation/Core
-  - Reveal-SDK (7)
+  - Reveal-SDK (8)
   - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
@@ -30,7 +30,7 @@ SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   DTCoreText: 51904f2374af443e0d270d6fdc76035ab6f9ef8a
   DTFoundation: 26a164ef510877387906fb92bff524a792db4bf8
-  Reveal-SDK: 564657bc66c93d2718b1c0121cdebe99d354ddab
+  Reveal-SDK: 43be4e662864e937960d0d04d005135e29c4e53b
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
 PODFILE CHECKSUM: 34351253387ecfdef77dc7d816628df1f43d8123

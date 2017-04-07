@@ -19,6 +19,7 @@ before_install:
   - gem install xcpretty -N
   - brew update
   - brew install swiftlint || true
+  - pod update
   - wget https://raw.githubusercontent.com/zchan0/FanfouExpress/dev/.swiftlint.yml
 script:
   - set -o pipefail
