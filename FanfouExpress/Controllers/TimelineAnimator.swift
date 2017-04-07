@@ -8,17 +8,12 @@
 
 import UIKit
 
-/// background view
-private let horizontalMargin: CGFloat = 25
-/// between detail view and background view
-private let verticalMargin: CGFloat = 8
-
 class TimelineAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     var presenting: Bool = true
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.2
+        return 0.3
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -28,17 +23,21 @@ class TimelineAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         // Set up some variables for the animation
         let containerView = transitionContext.containerView
         
+        let containerFrame = containerView.frame
         var toViewStartFrame = transitionContext.initialFrame(for: toVC)
         var toViewFinalFrame = transitionContext.finalFrame(for: toVC)
         var fromViewFinalFrame = transitionContext.finalFrame(for: fromVC)
         
         // Set up the animation parameters
         if presenting {
-            toViewFinalFrame.origin.y = 20 + verticalMargin
-            toViewStartFrame   = CGRect(x: 0, y: containerView.bounds.height,
+            let toViewFinalY = UIDevice.statusBarHeight + TransitionStyle.BackgroundVerticalMargin
+            let fromViewFinalX = TransitionStyle.BackgroundOriginX
+            
+            toViewFinalFrame.origin.y = toViewFinalY
+            toViewStartFrame   = CGRect(x: 0, y: containerFrame.height,
                                         width: toViewFinalFrame.width, height: toViewFinalFrame.height)
-            fromViewFinalFrame = CGRect(x: horizontalMargin, y: 20,
-                                        width: toViewFinalFrame.width - horizontalMargin * 2, height: toViewFinalFrame.height - 20)
+            fromViewFinalFrame = CGRect(x: fromViewFinalX, y: UIDevice.statusBarHeight,
+                                        width: containerFrame.width - fromViewFinalX * 2, height: containerFrame.height - UIDevice.statusBarHeight)
             
             fromVC.view.isHidden = true
             toVC.view.frame = toViewStartFrame
@@ -60,8 +59,13 @@ class TimelineAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             if success == false {
                 toVC.view.removeFromSuperview()
             }
-            fromVC.view.isHidden = false
-            fromVC.view.frame = fromViewFinalFrame
+            
+            // for present
+            if self.presenting {
+                fromVC.view.isHidden = false
+                fromVC.view.frame = fromViewFinalFrame
+            }
+
             transitionContext.completeTransition(success)
         }
     }

@@ -46,10 +46,11 @@ class TimelinePresentationController: UIPresentationController {
         containerView.addSubview(dimmingView)
         
         if let coordinator = presentedViewController.transitionCoordinator {
+            let snapshotX = TransitionStyle.BackgroundOriginX
             coordinator.animate(alongsideTransition: { _ in
                 self.dimmingView.alpha = 1.0
-                snapshot.frame = CGRect(x: horizontalMargin, y: 20,
-                                        width: containerView.bounds.width - horizontalMargin * 2, height: containerView.bounds.height - 20)
+                snapshot.frame = CGRect(x: snapshotX, y: UIDevice.statusBarHeight,
+                                        width: containerView.bounds.width - snapshotX * 2, height: containerView.bounds.height - UIDevice.statusBarHeight)
             }, completion: { _ in
                 snapshot.removeFromSuperview()
             })

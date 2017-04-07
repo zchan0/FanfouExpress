@@ -35,6 +35,13 @@ extension NSAttributedString {
     }
 }
 
+extension UIDevice {
+    
+    class var statusBarHeight: CGFloat {
+        return UIApplication.shared.statusBarFrame.height
+    }
+}
+
 extension UIFont {
     
     class func defaultFont(ofSize size: CGFloat) -> UIFont {
