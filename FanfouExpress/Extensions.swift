@@ -35,6 +35,13 @@ extension NSAttributedString {
     }
 }
 
+extension UIDevice {
+    
+    class var statusBarHeight: CGFloat {
+        return UIApplication.shared.statusBarFrame.height
+    }
+}
+
 extension UIFont {
     
     class func defaultFont(ofSize size: CGFloat) -> UIFont {
@@ -91,5 +98,17 @@ extension UIViewController {
     
     func stopLoading() {
         SVProgressHUD.dismiss()
+    }
+}
+
+extension UINavigationController {
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        // Change status bar style of DetailsViewController to .lightContent
+        // Work with setNeedsStatusBarAppearanceUpdate()
+        if presentedViewController is DetailsViewController {
+            return .lightContent
+        }
+        return super.preferredStatusBarStyle
     }
 }

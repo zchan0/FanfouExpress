@@ -58,13 +58,24 @@ struct DetailCellStyle {
     // Spacing
     static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 20, right: 25)
 
-    // header spacing
-    static let AvatarVerticalMargin: CGFloat = 30   // margin between avatarImageView and buttons above it
+    // Button
+    static let ButtonSize: CGFloat = 20
+    static let ButtonVerticalMargin: CGFloat = 15
+    static let ButtonHorizontalMargin: CGFloat = 20
+    
+    // Quotation
     static let QuotationVerticalMargin: CGFloat = 8    // margin beween quotationLabel and avatarImageView
     static let QuotationHorizontalPadding: CGFloat = 20
     
     // Image
     static let AvatarHeight: CGFloat = 96
+    static let AvatarVerticalMargin: CGFloat = 30   // margin between avatarImageView and buttons above it
+}
+
+struct TransitionStyle {
+    
+    static let BackgroundOriginX: CGFloat = 25
+    static let BackgroundVerticalMargin: CGFloat = 8    // margin between presenting and presented view
 }
 
 struct NavigationBarAppearance {
