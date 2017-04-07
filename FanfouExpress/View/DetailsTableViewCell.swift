@@ -9,30 +9,47 @@
 import UIKit
 
 class DetailHeaderCell: UITableViewCell {
-        
+    
+    var dismissBlock: (() -> Void)?
+    var shareBlock: (() -> Void)?
+    
+    private let shareButton: UIButton
+    private let dismissButton: UIButton
     private let quotationLabel: UILabel
     private let avatarImageView: UIImageView
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        quotationLabel = UILabel()
-        avatarImageView = UIImageView()
+        self.shareButton = UIButton(type: .custom)
+        self.dismissButton = UIButton(type: .custom)
+        self.quotationLabel = UILabel()
+        self.avatarImageView = UIImageView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        // dismiss button
+        self.dismissButton.setImage(#imageLiteral(resourceName: "navi-down"), for: .normal)
+        self.dismissButton.addTarget(self, action: #selector(pressedDismissButton), for: .touchUpInside)
+        
+        // share button
+        self.shareButton.setImage(#imageLiteral(resourceName: "navi-share"), for: .normal)
+        self.shareButton.addTarget(self, action: #selector(pressedShareButton), for: .touchUpInside)
+        
         // avatar image view
-        avatarImageView.clipsToBounds = true
-        avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.backgroundColor = UIColor.lightGray
-        avatarImageView.layer.borderWidth = 2
-        avatarImageView.layer.borderColor = FFEColor.AccentColor.cgColor
-        avatarImageView.layer.cornerRadius = DetailCellStyle.AvatarHeight / 2
+        self.avatarImageView.clipsToBounds = true
+        self.avatarImageView.contentMode = .scaleAspectFill
+        self.avatarImageView.backgroundColor = UIColor.lightGray
+        self.avatarImageView.layer.borderWidth = 2
+        self.avatarImageView.layer.borderColor = FFEColor.AccentColor.cgColor
+        self.avatarImageView.layer.cornerRadius = DetailCellStyle.AvatarHeight / 2
         
         // quotation label
-        quotationLabel.text = "“"
-        quotationLabel.textColor = FFEColor.AccentColor
-        quotationLabel.font = DetailCellStyle.QuotationFont
+        self.quotationLabel.text = "“"
+        self.quotationLabel.textColor = FFEColor.AccentColor
+        self.quotationLabel.font = DetailCellStyle.QuotationFont
         
-        contentView.addSubview(quotationLabel)
-        contentView.addSubview(avatarImageView)
+        self.contentView.addSubview(shareButton)
+        self.contentView.addSubview(dismissButton)
+        self.contentView.addSubview(quotationLabel)
+        self.contentView.addSubview(avatarImageView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,19 +59,33 @@ class DetailHeaderCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let contentRect = UIEdgeInsetsInsetRect(CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height),
-                                                DetailCellStyle.ContentInsets)
-        let contentSize = contentRect.size
+        let contentSize = contentView.bounds.size
+        let buttonSize = DetailCellStyle.ButtonSize
+        
+        dismissButton.frame = {
+            let buttonX = DetailCellStyle.ButtonHorizontalMargin
+            let buttonY = DetailCellStyle.ButtonVerticalMargin
+            return CGRect(x: buttonX, y: buttonY, width: buttonSize, height: buttonSize)
+        }()
+        
+        shareButton.frame = {
+            let buttonX = contentSize.width - dismissButton.frame.maxX
+            let buttonY = DetailCellStyle.ButtonVerticalMargin
+            return CGRect(x: buttonX, y: buttonY, width: buttonSize, height: buttonSize)
+        }()
         
         avatarImageView.frame = {
-            return CGRect(x: (contentView.bounds.width - DetailCellStyle.AvatarHeight) / 2, y: DetailCellStyle.AvatarVerticalMargin,
-                          width: DetailCellStyle.AvatarHeight, height: DetailCellStyle.AvatarHeight)
+            let avatarX = (contentView.bounds.width - DetailCellStyle.AvatarHeight) / 2
+            let avatarY = DetailCellStyle.AvatarVerticalMargin
+            let avatarSize = DetailCellStyle.AvatarHeight
+            return CGRect(x: avatarX, y: avatarY, width: avatarSize, height: avatarSize)
         }()
         
         quotationLabel.frame = {
+            let labelX = DetailCellStyle.QuotationHorizontalPadding
+            let labelY = avatarImageView.frame.maxY + DetailCellStyle.AvatarVerticalMargin
             let labelSize = quotationLabel.sizeThatFits(contentSize)
-            return CGRect(origin: CGPoint(x: DetailCellStyle.QuotationHorizontalPadding, y: avatarImageView.frame.maxY + DetailCellStyle.AvatarVerticalMargin),
-                          size: CGSize(width: contentSize.width, height: labelSize.height))
+            return CGRect(x: labelX, y: labelY, width: contentSize.width, height: labelSize.height)
         }()
     }
     
@@ -64,7 +95,20 @@ class DetailHeaderCell: UITableViewCell {
     
     class func height(forWidth width: CGFloat) -> CGFloat {
         let quotationHeight = "“".height(forFont: DetailCellStyle.QuotationFont, forWidth: width)
-        return DetailCellStyle.AvatarVerticalMargin + DetailCellStyle.AvatarHeight + DetailCellStyle.QuotationVerticalMargin + quotationHeight
+        return DetailCellStyle.ButtonVerticalMargin + DetailCellStyle.ButtonSize
+            + DetailCellStyle.AvatarVerticalMargin + DetailCellStyle.AvatarHeight
+            + DetailCellStyle.QuotationVerticalMargin + quotationHeight
+    }
+}
+
+private extension DetailHeaderCell {
+    
+    @objc func pressedDismissButton() {
+        dismissBlock?()
+    }
+    
+    @objc func pressedShareButton() {
+        shareBlock?()
     }
 }
 
