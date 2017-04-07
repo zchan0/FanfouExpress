@@ -120,11 +120,13 @@ extension TimelineViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        return TimelinePresentAnimator()
+        return TimelineAnimator()
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TimelineDismissAnimator()
+        let animator = TimelineAnimator()
+        animator.presenting = false
+        return animator
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
