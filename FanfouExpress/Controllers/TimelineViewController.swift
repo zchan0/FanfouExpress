@@ -139,7 +139,7 @@ extension TimelineViewController: UIViewControllerTransitioningDelegate {
 private extension TimelineViewController {
     
     func configNavigationBar() {
-        title = "每日精选"
+        title = "今日精选"
         
         navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: NavigationBarAppearance.TitleFont

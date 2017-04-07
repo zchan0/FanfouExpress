@@ -8,11 +8,6 @@
 
 import UIKit
 
-/// background view
-private let horizontalMargin: CGFloat = 25
-/// between detail view and background view
-private let verticalMargin: CGFloat = 8
-
 class TimelinePresentationController: UIPresentationController {
     
     private let dimmingView: UIView
@@ -88,5 +83,11 @@ class TimelinePresentationController: UIPresentationController {
         if completed {
             dimmingView.removeFromSuperview()
         }
+    }
+    
+    override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
+        guard let containerView = containerView else { return }
+        dimmingView.frame = containerView.bounds
     }
 }

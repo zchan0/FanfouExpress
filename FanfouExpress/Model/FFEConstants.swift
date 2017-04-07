@@ -64,7 +64,7 @@ struct DetailCellStyle {
     static let ButtonHorizontalMargin: CGFloat = 20
     
     // Quotation
-    static let QuotationVerticalMargin: CGFloat = 8    // margin beween quotationLabel and avatarImageView
+    static let QuotationVerticalMargin: CGFloat = 15    // margin beween quotationLabel and avatarImageView
     static let QuotationHorizontalPadding: CGFloat = 20
     
     // Image

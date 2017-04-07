@@ -76,7 +76,7 @@ class DetailHeaderCell: UITableViewCell {
         
         avatarImageView.frame = {
             let avatarX = (contentView.bounds.width - DetailCellStyle.AvatarHeight) / 2
-            let avatarY = DetailCellStyle.AvatarVerticalMargin
+            let avatarY = dismissButton.frame.maxY + DetailCellStyle.AvatarVerticalMargin
             let avatarSize = DetailCellStyle.AvatarHeight
             return CGRect(x: avatarX, y: avatarY, width: avatarSize, height: avatarSize)
         }()
