@@ -93,3 +93,15 @@ extension UIViewController {
         SVProgressHUD.dismiss()
     }
 }
+
+extension UINavigationController {
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        // Change status bar style of DetailsViewController to .lightContent
+        // Work with setNeedsStatusBarAppearanceUpdate()
+        if presentedViewController is DetailsViewController {
+            return .lightContent
+        }
+        return super.preferredStatusBarStyle
+    }
+}

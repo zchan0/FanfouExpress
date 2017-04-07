@@ -64,7 +64,7 @@ class TimelineViewController: UITableViewController {
     }
 }
 
-// MARK: - TableView
+// MARK: - TableView delegate
 
 extension TimelineViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -105,14 +105,34 @@ extension TimelineViewController {
             print("Failed to retrieve msgs in \(digest?.description ?? "nil digest")")
             return
         }
-        let msg = msgs[indexPath.row]
         
+        let msg = msgs[indexPath.row]
         let detailsViewController = DetailsViewController(style: .plain)
         detailsViewController.msg = msg
-        let navigationController = UINavigationController(rootViewController: detailsViewController)
-        present(navigationController, animated: true, completion: nil)
+        detailsViewController.transitioningDelegate = self
+        present(detailsViewController, animated: true, completion: nil)
     }
 }
+
+// MARK: - Transition delegate
+
+extension TimelineViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        return TimelinePresentAnimator()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TimelineDismissAnimator()
+    }
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return TimelinePresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+// MARK: - Private methods
 
 private extension TimelineViewController {
     

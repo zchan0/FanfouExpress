@@ -25,6 +25,8 @@ class DetailsViewController: UITableViewController {
         self.msg = nil
         self.dataArray = [UITableViewCell]()
         super.init(style: style)
+        
+        self.modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
