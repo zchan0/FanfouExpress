@@ -106,7 +106,7 @@ extension UINavigationController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         // Change status bar style of DetailsViewController to .lightContent
         // Work with setNeedsStatusBarAppearanceUpdate()
-        if visibleViewController is DetailsViewController {
+        if visibleViewController is DetailsViewController || visibleViewController is UIActivityViewController {
             return .lightContent
         }
         return super.preferredStatusBarStyle
