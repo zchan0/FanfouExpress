@@ -108,9 +108,11 @@ extension TimelineViewController {
         
         let msg = msgs[indexPath.row]
         let detailsViewController = DetailsViewController(style: .plain)
+        let navigationViewController = UINavigationController(rootViewController: detailsViewController)
         detailsViewController.msg = msg
-        detailsViewController.transitioningDelegate = self
-        present(detailsViewController, animated: true, completion: nil)
+        navigationViewController.transitioningDelegate = self
+        navigationViewController.modalPresentationStyle = .custom
+        present(navigationViewController, animated: true, completion: nil)
     }
 }
 
@@ -120,7 +122,9 @@ extension TimelineViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        return TimelineAnimator()
+        let animator = TimelineAnimator()
+        animator.presenting = true
+        return animator
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {

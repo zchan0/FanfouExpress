@@ -106,9 +106,14 @@ extension UINavigationController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         // Change status bar style of DetailsViewController to .lightContent
         // Work with setNeedsStatusBarAppearanceUpdate()
-        if presentedViewController is DetailsViewController {
+        if visibleViewController is DetailsViewController {
             return .lightContent
         }
         return super.preferredStatusBarStyle
+    }
+    
+    func removeBorder() {
+        navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
 }

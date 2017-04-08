@@ -57,11 +57,6 @@ struct DetailCellStyle {
     
     // Spacing
     static let ContentInsets: UIEdgeInsets  = UIEdgeInsets(top: 0, left: 40, bottom: 20, right: 25)
-
-    // Button
-    static let ButtonSize: CGFloat = 20
-    static let ButtonVerticalMargin: CGFloat = 15
-    static let ButtonHorizontalMargin: CGFloat = 20
     
     // Quotation
     static let QuotationVerticalMargin: CGFloat = 15    // margin beween quotationLabel and avatarImageView

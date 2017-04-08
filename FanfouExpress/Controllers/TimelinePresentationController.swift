@@ -32,26 +32,16 @@ class TimelinePresentationController: UIPresentationController {
         dimmingView.alpha = 0.0
         dimmingView.frame = containerView.bounds
         
-        guard let snapshot = presentingViewController.view.snapshotView(afterScreenUpdates: true) else { return }
-        snapshot.frame = containerView.bounds
-        
         // Add views to the view hierarchy and 
         // set up animations related to those views
-        containerView.addSubview(snapshot)
         containerView.addSubview(dimmingView)
         
         if let coordinator = presentedViewController.transitionCoordinator {
-            let snapshotX = TransitionStyle.BackgroundOriginX
             coordinator.animate(alongsideTransition: { _ in
                 self.dimmingView.alpha = 1.0
-                snapshot.frame = CGRect(x: snapshotX, y: UIDevice.statusBarHeight,
-                                        width: containerView.bounds.width - snapshotX * 2, height: containerView.bounds.height - UIDevice.statusBarHeight)
-            }, completion: { _ in
-                snapshot.removeFromSuperview()
-            })
+            }, completion: nil)
         } else {
             dimmingView.alpha = 1.0
-            snapshot.removeFromSuperview()
         }
     }
     
@@ -68,7 +58,7 @@ class TimelinePresentationController: UIPresentationController {
             }, completion: { [weak self] _ in
                 guard let `self` = self else { return }
                 // Reset corner radius
-                self.presentingViewController.view.layer.cornerRadius = 0
+                self.presentingViewController.view.layer.cornerRadius  = 0
                 self.presentingViewController.view.layer.masksToBounds = false
                 
                 // Call presenting view controller to change status bar style
