@@ -9,29 +9,14 @@
 import UIKit
 
 class DetailHeaderCell: UITableViewCell {
-    
-    var dismissBlock: (() -> Void)?
-    var shareBlock: (() -> Void)?
-    
-    private let shareButton: UIButton
-    private let dismissButton: UIButton
+
     private let quotationLabel: UILabel
     private let avatarImageView: UIImageView
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.shareButton = UIButton(type: .custom)
-        self.dismissButton = UIButton(type: .custom)
         self.quotationLabel = UILabel()
         self.avatarImageView = UIImageView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        // dismiss button
-        self.dismissButton.setImage(#imageLiteral(resourceName: "navi-down"), for: .normal)
-        self.dismissButton.addTarget(self, action: #selector(pressedDismissButton), for: .touchUpInside)
-        
-        // share button
-        self.shareButton.setImage(#imageLiteral(resourceName: "navi-share"), for: .normal)
-        self.shareButton.addTarget(self, action: #selector(pressedShareButton), for: .touchUpInside)
         
         // avatar image view
         self.avatarImageView.clipsToBounds = true
@@ -45,9 +30,7 @@ class DetailHeaderCell: UITableViewCell {
         self.quotationLabel.text = "“"
         self.quotationLabel.textColor = FFEColor.AccentColor
         self.quotationLabel.font = DetailCellStyle.QuotationFont
-        
-        self.contentView.addSubview(shareButton)
-        self.contentView.addSubview(dismissButton)
+
         self.contentView.addSubview(quotationLabel)
         self.contentView.addSubview(avatarImageView)
     }
@@ -60,23 +43,10 @@ class DetailHeaderCell: UITableViewCell {
         super.layoutSubviews()
         
         let contentSize = contentView.bounds.size
-        let buttonSize = DetailCellStyle.ButtonSize
-        
-        dismissButton.frame = {
-            let buttonX = DetailCellStyle.ButtonHorizontalMargin
-            let buttonY = DetailCellStyle.ButtonVerticalMargin
-            return CGRect(x: buttonX, y: buttonY, width: buttonSize, height: buttonSize)
-        }()
-        
-        shareButton.frame = {
-            let buttonX = contentSize.width - dismissButton.frame.maxX
-            let buttonY = DetailCellStyle.ButtonVerticalMargin
-            return CGRect(x: buttonX, y: buttonY, width: buttonSize, height: buttonSize)
-        }()
-        
+
         avatarImageView.frame = {
             let avatarX = (contentView.bounds.width - DetailCellStyle.AvatarHeight) / 2
-            let avatarY = dismissButton.frame.maxY + DetailCellStyle.AvatarVerticalMargin
+            let avatarY = DetailCellStyle.AvatarVerticalMargin
             let avatarSize = DetailCellStyle.AvatarHeight
             return CGRect(x: avatarX, y: avatarY, width: avatarSize, height: avatarSize)
         }()
@@ -95,20 +65,7 @@ class DetailHeaderCell: UITableViewCell {
     
     class func height(forWidth width: CGFloat) -> CGFloat {
         let quotationHeight = "“".height(forFont: DetailCellStyle.QuotationFont, forWidth: width)
-        return DetailCellStyle.ButtonVerticalMargin + DetailCellStyle.ButtonSize
-            + DetailCellStyle.AvatarVerticalMargin + DetailCellStyle.AvatarHeight
+        return DetailCellStyle.AvatarVerticalMargin + DetailCellStyle.AvatarHeight
             + DetailCellStyle.QuotationVerticalMargin + quotationHeight
     }
 }
-
-private extension DetailHeaderCell {
-    
-    @objc func pressedDismissButton() {
-        dismissBlock?()
-    }
-    
-    @objc func pressedShareButton() {
-        shareBlock?()
-    }
-}
-

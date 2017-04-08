@@ -25,8 +25,6 @@ class DetailsViewController: UITableViewController {
         self.msg = nil
         self.dataArray = [UITableViewCell]()
         super.init(style: style)
-        
-        self.modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,10 +33,14 @@ class DetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupNavigationBar()
+
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
+        // Added extra BackgroundVerticalMargin to toViewFinalY in transitioning animation
+        tableView.contentInset.bottom = TransitionStyle.BackgroundVerticalMargin + CellStyle.ContentInsets.bottom
         
         loadData()
     }
@@ -114,36 +116,6 @@ private extension DetailsViewController {
         }
         
         let headerCell = DetailHeaderCell(style: .default, reuseIdentifier: nil)
-        
-        headerCell.dismissBlock = {
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        headerCell.shareBlock = { [weak self] in
-            guard let `self` = self else { return }
-            guard let msg = self.msg else { return }
-            guard let contentCell = self.dataArray[RowType.content.rawValue] as? TimelineTableViewCell else { return }
-            
-            var activityItems:[Any] = [contentCell.parsedContent]
-            
-            if let statusURL = msg.statusURL {
-                activityItems.append(statusURL)
-            }
-            if  let image = contentCell.previewImage {
-                activityItems.append(image)
-            }
-            
-            let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-            controller.completionWithItemsHandler = { (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, activityError: Error?) in
-                if completed {
-                    print("[UIActivityViewController]: Succeed")
-                } else {
-                    print(activityError?.localizedDescription ?? "[UIActivityViewController]: Failed")
-                }
-            }
-            self.present(controller, animated: true, completion: nil)
-        }
-        
         headerCell.updateCell(withAvatar: msg.avatarURL)
         
         let contentCell = TimelineTableViewCell(style: .default, reuseIdentifier: nil)
@@ -151,11 +123,56 @@ private extension DetailsViewController {
         contentCell.contentInsets = DetailCellStyle.ContentInsets
         contentCell.updateCell(msg)
         
-        self.dataArray = [headerCell, contentCell]
+        dataArray = [headerCell, contentCell]
+    }
+    
+    func setupNavigationBar() {
+        navigationController?.removeBorder()
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.isTranslucent = false
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 5
+        
+        let dismissButton = UIBarButtonItem(image: #imageLiteral(resourceName: "navi-down"), style: .plain, target: self, action: #selector(pressedDismissButton))
+        dismissButton.tintColor = FFEColor.AccentColor
+        navigationItem.leftBarButtonItems = [spacer, dismissButton]
+        
+        let shareButton = UIBarButtonItem(image: #imageLiteral(resourceName: "navi-share"), style: .plain, target: self, action: #selector(pressedShareButton))
+        shareButton.tintColor = FFEColor.AccentColor
+        navigationItem.rightBarButtonItems = [spacer, shareButton]
+    }
+    
+    @objc func pressedDismissButton() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func pressedShareButton() {
+        guard let msg = msg else { return }
+        guard let contentCell = dataArray[RowType.content.rawValue] as? TimelineTableViewCell else { return }
+        
+        var activityItems:[Any] = [contentCell.parsedContent]
+        
+        if let statusURL = msg.statusURL {
+            activityItems.append(statusURL)
+        }
+        if  let image = contentCell.previewImage {
+            activityItems.append(image)
+        }
+        
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        controller.completionWithItemsHandler = { (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, activityError: Error?) in
+            if completed {
+                print("[UIActivityViewController]: Succeed")
+            } else {
+                print(activityError?.localizedDescription ?? "[UIActivityViewController]: Failed")
+            }
+        }
+        present(controller, animated: true, completion: nil)
     }
     
     @objc func pressedLinkButton(sender: DTLinkButton) {
-        guard let url = sender.url else { return }        
+        guard let url = sender.url else { return }
         
         if url.scheme == Constants.HTTPScheme || url.scheme == Constants.HTTPSScheme {
             let safariController = SFSafariViewController(url: url)
