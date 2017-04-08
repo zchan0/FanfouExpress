@@ -13,61 +13,82 @@ class TimelineAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var presenting: Bool = true
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3
+        return 0.4
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
+
         guard let toVC   = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)   else { return }
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) else { return }
-        
-        // Set up some variables for the animation
-        let containerView = transitionContext.containerView
+        guard let snapshot = presenting ? fromVC.view.snapshotView(afterScreenUpdates: true) : containerView.subviews.first else { return }
         
         let containerFrame = containerView.frame
-        var toViewStartFrame = transitionContext.initialFrame(for: toVC)
-        var toViewFinalFrame = transitionContext.finalFrame(for: toVC)
+        let fromViewStartFrame = transitionContext.initialFrame(for: fromVC)
         var fromViewFinalFrame = transitionContext.finalFrame(for: fromVC)
+        var toViewStartFrame   = transitionContext.initialFrame(for: toVC)
+        var toViewFinalFrame   = transitionContext.finalFrame(for: toVC)
         
-        // Set up the animation parameters
+        var scaleTransform = CGAffineTransform()
+        var translationTransform = CGAffineTransform()
+        
         if presenting {
-            let toViewFinalY = UIDevice.statusBarHeight + TransitionStyle.BackgroundVerticalMargin
-            let fromViewFinalX = TransitionStyle.BackgroundOriginX
+            fromViewFinalFrame = CGRect(x: TransitionStyle.BackgroundOriginX,
+                                        y: UIDevice.statusBarHeight,
+                                        width: fromViewStartFrame.width - TransitionStyle.BackgroundOriginX * 2,
+                                        height: fromViewStartFrame.height - UIDevice.statusBarHeight * 2)
             
-            toViewFinalFrame.origin.y = toViewFinalY
-            toViewStartFrame   = CGRect(x: 0, y: containerFrame.height,
-                                        width: toViewFinalFrame.width, height: toViewFinalFrame.height)
-            fromViewFinalFrame = CGRect(x: fromViewFinalX, y: UIDevice.statusBarHeight,
-                                        width: containerFrame.width - fromViewFinalX * 2, height: containerFrame.height - UIDevice.statusBarHeight)
+            let xScaleFactor = fromViewFinalFrame.width / fromViewStartFrame.width
+            let yScaleFactor = fromViewFinalFrame.height / fromViewStartFrame.height
+            scaleTransform = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
             
+            toViewStartFrame = CGRect(x: 0, y: containerFrame.height, width: toViewFinalFrame.width, height: toViewFinalFrame.height)
+            toViewFinalFrame.origin.y = UIDevice.statusBarHeight + TransitionStyle.BackgroundVerticalMargin
+            translationTransform = CGAffineTransform(translationX: 0, y: toViewFinalFrame.origin.y - toViewStartFrame.origin.y)
+            
+
             fromVC.view.isHidden = true
+            snapshot.frame  = fromViewStartFrame
             toVC.view.frame = toViewStartFrame
             containerView.addSubview(toVC.view)
+            containerView.insertSubview(snapshot, at: 0)    // Insert snapshot below everything else.
+            
+            // tweak contentInset
+            // swiftlint:disable:next force_cast
+            if toVC is UINavigationController, let detail = (toVC as! UINavigationController).visibleViewController as? DetailsViewController {
+                var inset = UIEdgeInsets.zero
+                inset.bottom = TransitionStyle.BackgroundVerticalMargin + CellStyle.ContentInsets.bottom
+                detail.tableView.contentInset = inset
+            }
+            
         } else {
-            fromViewFinalFrame.origin.y = containerView.bounds.height
+            translationTransform = CGAffineTransform.identity
+            scaleTransform = CGAffineTransform.identity
         }
         
-        // Animate
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-            toVC.view.frame = toViewFinalFrame
-            
-            // for dismiss
-            if self.presenting == false {
-                fromVC.view.frame = fromViewFinalFrame
+            snapshot.transform = scaleTransform
+            if self.presenting {
+                toVC.view.transform = translationTransform
+            } else {
+                fromVC.view.transform = translationTransform
             }
         }) { _ in
             let success = !transitionContext.transitionWasCancelled
-            if success == false {
-                toVC.view.removeFromSuperview()
+            if self.presenting {
+                // failed to present, need clean up
+                if success == false {
+                    fromVC.view.isHidden = false
+                    snapshot.removeFromSuperview()
+                    toVC.view.removeFromSuperview()
+                }
+            }
+            // succeed to dismiss, show Timeline view controller
+            else if success {
+                toVC.view.isHidden = false
             }
             
-            // for present
-            if self.presenting {
-                fromVC.view.isHidden = false
-                fromVC.view.frame = fromViewFinalFrame
-            }
-
             transitionContext.completeTransition(success)
         }
     }
 }
-

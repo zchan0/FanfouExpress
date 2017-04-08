@@ -39,8 +39,6 @@ class DetailsViewController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
-        // Added extra BackgroundVerticalMargin to toViewFinalY in transitioning animation
-        tableView.contentInset.bottom = TransitionStyle.BackgroundVerticalMargin + CellStyle.ContentInsets.bottom
         
         loadData()
     }
