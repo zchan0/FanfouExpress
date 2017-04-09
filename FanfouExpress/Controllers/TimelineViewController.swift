@@ -59,6 +59,8 @@ class TimelineViewController: UITableViewController {
                 guard let `self` = self else { return }
                 self.title = DateUtils.chineseDateFormatter.string(from: randomDate)
                 self.tableView.reloadData()
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
             })
         }
     }
