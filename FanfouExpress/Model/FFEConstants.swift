@@ -69,7 +69,7 @@ struct DetailCellStyle {
 
 struct TransitionStyle {
     
-    static let BackgroundOriginX: CGFloat = 25
+    static let BackgroundOrigin: CGPoint = CGPoint(x: 25, y: UIDevice.statusBarHeight)
     static let BackgroundVerticalMargin: CGFloat = 8    // margin between presenting and presented view
 }
 
