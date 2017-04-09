@@ -175,6 +175,7 @@ private extension DetailsViewController {
         if url.scheme == Constants.HTTPScheme || url.scheme == Constants.HTTPSScheme {
             let safariController = SFSafariViewController(url: url)
             safariController.delegate = self
+            safariController.modalPresentationStyle = .custom
             safariController.preferredControlTintColor = FFEColor.AccentColor
             present(safariController, animated: true, completion: nil)
         }

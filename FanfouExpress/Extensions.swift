@@ -104,12 +104,13 @@ extension UIViewController {
 extension UINavigationController {
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        // Change status bar style of DetailsViewController to .lightContent
+        // Change status bar style to .lightContent
         // Work with setNeedsStatusBarAppearanceUpdate()
-        if visibleViewController is DetailsViewController || visibleViewController is UIActivityViewController {
-            return .lightContent
+        if visibleViewController is TimelineViewController
+            && presentedViewController == nil {
+            return .default
         }
-        return super.preferredStatusBarStyle
+        return .lightContent
     }
     
     func removeBorder() {
