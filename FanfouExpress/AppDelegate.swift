@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let controller = TimelineViewController(style: .plain)
         let navigationController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navigationController
+        
+        // Crashlytics
+        Fabric.with([Crashlytics.self])
         
         return true
     }

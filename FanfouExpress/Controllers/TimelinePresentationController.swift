@@ -65,7 +65,7 @@ class TimelinePresentationController: UIPresentationController {
         } else {
             // Tweak contentInset
             guard let navigation = presentedViewController as? UINavigationController else { return }
-            guard let detail = navigation.presentedViewController as? DetailsViewController else { return }
+            guard let detail = navigation.visibleViewController as? DetailsViewController else { return }
             detail.tableView.contentInset.bottom = TransitionStyle.BackgroundVerticalMargin + CellStyle.ContentInsets.bottom
         }
     }

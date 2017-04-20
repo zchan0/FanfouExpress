@@ -8,6 +8,8 @@ target 'FanfouExpress' do
   # Pods for FanfouExpress
   pod 'Alamofire', '~> 4.4'
   pod 'DTCoreText'
+  pod 'Fabric'
+  pod 'Crashlytics' 
   pod 'SVProgressHUD'
   pod 'Reveal-SDK', :configurations => ['Debug']
 
