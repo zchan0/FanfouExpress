@@ -35,7 +35,7 @@ class ImageScrollView: UIScrollView {
         zoomView = UIImageView()
         super.init(frame: frame)
         self.showsVerticalScrollIndicator = false
-        self.shouldGroupAccessibilityChildren = false
+        self.showsHorizontalScrollIndicator = false
         self.bouncesZoom = true
         self.decelerationRate = UIScrollViewDecelerationRateFast
         self.delegate = self
@@ -48,7 +48,28 @@ class ImageScrollView: UIScrollView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        centerImage()
+        // avoid setting zoomView's frame if it hasn't been initilized
+        guard let zoomView = zoomView else { return }
+        
+        // center the zoom view as it becomes smaller than the size of the screen
+        let boundsSize = bounds.size
+        var frameToCenter = zoomView.frame
+        
+        // center horizontally
+        if frameToCenter.width < boundsSize.width {
+            frameToCenter.origin.x = (boundsSize.width - frameToCenter.width) / 2.0
+        } else {
+            frameToCenter.origin.x = 0
+        }
+        
+        // center vertically
+        if frameToCenter.height < boundsSize.height {
+            frameToCenter.origin.y = (boundsSize.height - frameToCenter.height) / 2.0
+        } else {
+            frameToCenter.origin.y = 0
+        }
+        
+        zoomView.frame = frameToCenter
     }
 
     func displayImage(_ image: UIImage) {
@@ -60,6 +81,8 @@ class ImageScrollView: UIScrollView {
         
         // reset our zoomScale to 1.0 before doing any further calculations
         zoomScale = 1.0
+        minimumZoomScale = 1.0
+        maximumZoomScale = 1.0
         
         // make a new UIImageView for the new image
         zoomView = UIImageView(image: image)
@@ -95,42 +118,15 @@ private extension ImageScrollView {
         let phonePortrait = bounds.height > bounds.width
         var minScale: CGFloat = imagePortrait == phonePortrait ? xScale : fmin(xScale, yScale)
         
-        // on high resolution screens we have double the pixel density, so we will be seeing every pixel if we limit the
-        // maximum zoom scale to 0.5.
-        let maxScale: CGFloat = 1.0 / UIScreen.main.scale
+        let maxScale: CGFloat = 1.0
         
         // don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
         if minScale > maxScale {
             minScale = maxScale
         }
         
-        maximumZoomScale = maxScale
         minimumZoomScale = minScale
-    }
-    
-    func centerImage() {
-        // avoid setting zoomView's frame if it hasn't been initilized
-        guard let zoomView = zoomView else { return }
-        
-        // center the zoom view as it becomes smaller than the size of the screen
-        let boundsSize = bounds.size
-        var frameToCenter = zoomView.frame
-        
-        // center horizontally
-        if frameToCenter.width < boundsSize.width {
-            frameToCenter.origin.x = (boundsSize.width - frameToCenter.width) / 2
-        } else {
-            frameToCenter.origin.x = 0
-        }
-        
-        // center vertically
-        if frameToCenter.height < boundsSize.height {
-            frameToCenter.origin.y = (boundsSize.height - frameToCenter.height) / 2
-        } else {
-            frameToCenter.origin.y = 0
-        }
-        
-        zoomView.frame = frameToCenter
+        maximumZoomScale = maxScale
     }
     
     func prepareToResize() {
