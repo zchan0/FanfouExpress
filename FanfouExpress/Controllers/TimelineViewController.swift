@@ -98,6 +98,15 @@ extension TimelineViewController {
         let msg = msgs[indexPath.row]
         let cell: TimelineTableViewCell = tableView.dequeue(indexPath: indexPath)
         cell.updateCell(msg)
+        let placeholderImage = cell.previewImage == nil ? UIImage.imageWithColor(color: UIColor.black) : cell.previewImage!
+        if let url = msg.image?.previewURL {
+            cell.tapPreviewImageBlock = {
+                let photoController = PhotoBrowserController(withURL: url, placeholderImage)
+                photoController.modalPresentationStyle = .custom
+                photoController.modalPresentationCapturesStatusBarAppearance = true
+                self.present(photoController, animated: true, completion: nil)
+            }
+        }
         
         return cell
     }

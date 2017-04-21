@@ -44,7 +44,7 @@ class DetailsViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
         
-        loadData()
+        setupDataArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,7 +112,7 @@ extension DetailsViewController: SFSafariViewControllerDelegate {
 
 private extension DetailsViewController {
     
-    func loadData() {
+    func setupDataArray() {
         guard let msg = msg else {
             return
         }
@@ -124,6 +124,21 @@ private extension DetailsViewController {
         contentCell.textDelegate = self
         contentCell.contentInsets = DetailCellStyle.ContentInsets
         contentCell.updateCell(msg)
+        
+        var placeholderImage: UIImage
+        if let previewImage = contentCell.previewImage {
+            placeholderImage = previewImage
+        } else {
+            placeholderImage = UIImage.imageWithColor(color: UIColor.lightGray)
+        }
+        
+        if let url = msg.image?.previewURL {
+            contentCell.tapPreviewImageBlock = {
+                let controller = PhotoBrowserController(withURL: url, placeholderImage)
+                controller.modalPresentationStyle = .custom
+                self.present(controller, animated: true, completion: nil)
+            }
+        }
         
         dataArray = [headerCell, contentCell]
     }

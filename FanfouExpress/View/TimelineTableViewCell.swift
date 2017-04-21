@@ -33,6 +33,8 @@ class TimelineTableViewCell: UITableViewCell {
     var previewImage: UIImage? {
         return previewImageView.image
     }
+    
+    var tapPreviewImageBlock: (() -> Void)?
 
     private var contentLabel: DTAttributedLabel
     private var screenNameLabel: UILabel
@@ -52,8 +54,10 @@ class TimelineTableViewCell: UITableViewCell {
         
         self.previewImageView.isHidden = true
         self.previewImageView.clipsToBounds = true
+        self.previewImageView.isUserInteractionEnabled = true
         self.previewImageView.contentMode = .scaleAspectFill
         self.previewImageView.backgroundColor = UIColor.lightGray
+        self.previewImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPreviewImage)))
         
         self.contentView.addSubview(contentLabel)
         self.contentView.addSubview(screenNameLabel)
@@ -143,6 +147,10 @@ class TimelineTableViewCell: UITableViewCell {
             + screenNameHeight
             + imageHeight
             + contentInsets.bottom
+    }
+    
+    @objc private func tapPreviewImage() {
+        tapPreviewImageBlock?()
     }
 }
 

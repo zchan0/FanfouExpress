@@ -52,16 +52,36 @@ extension UIFont {
     }
 }
 
+extension UIImage {
+    
+    class func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 1, height: 1))
+        UIGraphicsBeginImageContext(rect.size)
+        
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
+    }
+}
+
 extension UIImageView {
     
     func setImage(withURL URL: URL) {
         Alamofire.request(URL).validate().responseData { (response) in
             guard let data = response.value else {
-                print("Failed to download image")
+                SVProgressHUD.showError(withStatus: "Failed to download image")
                 return
             }
+            
             let image = UIImage(data: data)
-            self.image = image
+            DispatchQueue.main.async {
+                self.image = image
+            }
         }
     }
 }
