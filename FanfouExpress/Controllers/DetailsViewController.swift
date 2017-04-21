@@ -21,6 +21,10 @@ class DetailsViewController: UITableViewController {
     var msg: Message?
     var dataArray: [UITableViewCell]
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override init(style: UITableViewStyle) {
         self.msg = nil
         self.dataArray = [UITableViewCell]()

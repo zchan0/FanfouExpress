@@ -110,10 +110,11 @@ extension TimelineViewController {
         
         let msg = msgs[indexPath.row]
         let detailsViewController = DetailsViewController(style: .plain)
-        let navigationViewController = UINavigationController(rootViewController: detailsViewController)
+        let navigationViewController = FFENavigationController(rootViewController: detailsViewController)
         detailsViewController.msg = msg
         navigationViewController.transitioningDelegate = self
         navigationViewController.modalPresentationStyle = .custom
+        navigationViewController.modalPresentationCapturesStatusBarAppearance = true
         present(navigationViewController, animated: true, completion: nil)
     }
 }

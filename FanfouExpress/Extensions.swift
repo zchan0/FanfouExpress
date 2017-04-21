@@ -99,20 +99,14 @@ extension UIViewController {
     func stopLoading() {
         SVProgressHUD.dismiss()
     }
+    
+    func showErrorMsg(withStatus status: String) {
+        SVProgressHUD.showError(withStatus: status)
+    }
 }
 
 extension UINavigationController {
-    
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        // Change status bar style to .lightContent
-        // Work with setNeedsStatusBarAppearanceUpdate()
-        if visibleViewController is TimelineViewController
-            && presentedViewController == nil {
-            return .default
-        }
-        return .lightContent
-    }
-    
+        
     func removeBorder() {
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
