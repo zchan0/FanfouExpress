@@ -169,11 +169,8 @@ private extension TimelineViewController {
         let router = Router.fetchDailyDigests(date: date)
         
         startLoading()
-        
         Alamofire.request(router).validate().responseJSON { (response) in
-            
             self.stopLoading()
-            
             switch response.result {
             case .success:
                 guard let json = response.value as? JSON else { return }
@@ -182,7 +179,7 @@ private extension TimelineViewController {
                     completionHandler()
                 }
             case .failure:
-                print("reponse error")
+                self.showErrorMsg(withStatus: "加载失败")
             }
         }
     }

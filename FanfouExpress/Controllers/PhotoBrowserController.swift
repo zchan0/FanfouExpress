@@ -44,7 +44,7 @@ class PhotoBrowserController: UIViewController {
             guard let `self` = self else { return }
             
             guard let data = response.value else {
-                self.showErrorMsg(withStatus: "Failed to download image")
+                self.showErrorMsg(withStatus: "加载图片失败")
                 return
             }
             

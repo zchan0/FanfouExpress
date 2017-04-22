@@ -74,7 +74,6 @@ extension UIImageView {
     func setImage(withURL URL: URL) {
         Alamofire.request(URL).validate().responseData { (response) in
             guard let data = response.value else {
-                SVProgressHUD.showError(withStatus: "Failed to download image")
                 return
             }
             
@@ -108,7 +107,7 @@ extension UITableView {
 extension UIViewController {
     
     func startLoading() {
-        startLoading(withStatus: "Loading..")
+        startLoading(withStatus: "加载中...")
     }
     
     func startLoading(withStatus status: String) {
