@@ -14,7 +14,7 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
     
     var digest: Digest?
     var transitionImage: UIImage
-    var transitionImageOriginFrame: CGRect
+    var transitionImageView: UIImageView
     
     var today: String {
         return DateUtils.dateFormatter.string(from: Date())
@@ -22,7 +22,7 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
     
     override init(style: UITableViewStyle) {
         self.transitionImage = UIImage()
-        self.transitionImageOriginFrame = CGRect.zero
+        self.transitionImageView = UIImageView()
         super.init(style: style)
     }
         
@@ -105,7 +105,7 @@ extension TimelineViewController {
         cell.updateCell(msg)
         if let url = msg.image?.previewURL {
             cell.tapPreviewImageBlock = { (tappedImageView) in
-                self.transitionImageOriginFrame = tappedImageView.frame
+                self.transitionImageView = tappedImageView
                 self.transitionImage = tappedImageView.image ?? UIImage.imageWithColor(color: .lightGray)
                 
                 let photoController = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)

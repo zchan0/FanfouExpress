@@ -11,7 +11,7 @@ import UIKit
 protocol PhotoBrowserTransitionSupport {
     
     var transitionImage: UIImage { get set }
-    var transitionImageOriginFrame: CGRect { get set }
+    var transitionImageView: UIImageView { get set }
 }
 
 class PhotoBrowserAnimator: UIPercentDrivenInteractiveTransition {
@@ -103,8 +103,9 @@ private extension PhotoBrowserAnimator {
         animateImageView.clipsToBounds = true
         animateImageView.contentMode = .scaleAspectFill
         
-        let initialFrame = transitionDelegate.transitionImageOriginFrame
-        let finalFrame = endFrame(forImageView: animateImageView, toVC.view.frame)        
+        let initialFrame = containerView.convert(transitionDelegate.transitionImageView.bounds, from: transitionDelegate.transitionImageView)
+        let finalFrame = endFrame(forImageView: animateImageView, toVC.view.frame)
+        
         
         toVC.view.alpha = 0.0
         animateImageView.frame = initialFrame
@@ -139,7 +140,7 @@ private extension PhotoBrowserAnimator {
         animateImgaeView.contentMode = .scaleAspectFill
         
         let initialFrame = photoBrowser.displayingImageView.frame
-        let finalFrame = transitionDelegate.transitionImageOriginFrame
+        let finalFrame = containerView.convert(transitionDelegate.transitionImageView.bounds, from: transitionDelegate.transitionImageView)
         
         toVC.view.alpha = 0.0
         animateImgaeView.frame = initialFrame
