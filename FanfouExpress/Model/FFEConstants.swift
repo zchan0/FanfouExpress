@@ -25,6 +25,10 @@ struct FFEColor {
     static let AccentColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1)
 }
 
+struct TLCell {
+    static let PlaceholderImage: UIImage = UIImage.imageWithColor(color: UIColor.lightGray)
+}
+
 struct CellStyle {
     
     // Font

@@ -30,8 +30,8 @@ class TimelineTableViewCell: UITableViewCell {
         return "\(contentLabel.attributedString.string)" + "\(screenNameLabel.text!)"
     }
     
-    var previewImage: UIImage? {
-        return previewImageView.image
+    override var imageView: UIImageView? {
+        return previewImageView
     }
     
     var tapPreviewImageBlock: (() -> Void)?

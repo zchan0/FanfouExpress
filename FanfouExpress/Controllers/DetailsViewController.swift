@@ -19,7 +19,8 @@ class DetailsViewController: UITableViewController {
     }
     
     var msg: Message?
-    var dataArray: [UITableViewCell]
+    
+    fileprivate var dataArray: [UITableViewCell]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -125,16 +126,9 @@ private extension DetailsViewController {
         contentCell.contentInsets = DetailCellStyle.ContentInsets
         contentCell.updateCell(msg)
         
-        var placeholderImage: UIImage
-        if let previewImage = contentCell.previewImage {
-            placeholderImage = previewImage
-        } else {
-            placeholderImage = UIImage.imageWithColor(color: UIColor.lightGray)
-        }
-        
         if let url = msg.image?.previewURL {
             contentCell.tapPreviewImageBlock = {
-                let controller = PhotoBrowserController(withURL: url, placeholderImage)
+                let controller = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)
                 controller.modalPresentationStyle = .custom
                 self.present(controller, animated: true, completion: nil)
             }
@@ -173,7 +167,7 @@ private extension DetailsViewController {
         if let statusURL = msg.statusURL {
             activityItems.append(statusURL)
         }
-        if  let image = contentCell.previewImage {
+        if  let image = contentCell.imageView?.image {
             activityItems.append(image)
         }
         
