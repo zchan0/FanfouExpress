@@ -10,11 +10,11 @@ import UIKit
 
 class ImageScrollView: UIScrollView {
 
-    var imageView: UIImageView? {
+    var imageView: UIImageView {
         return zoomView
     }
     
-    fileprivate var zoomView: UIImageView?
+    fileprivate var zoomView: UIImageView
     fileprivate var imageSize: CGSize = CGSize.zero
     fileprivate var pointToCenterAfterResize: CGPoint = CGPoint.zero
     fileprivate var scaleToRestoreAfterResize: CGFloat = 0
@@ -56,10 +56,9 @@ class ImageScrollView: UIScrollView {
     }
 
     func displayImage(_ image: UIImage) {
-        // clear the previous iamge
-        if let _ = zoomView {
-            zoomView!.removeFromSuperview()
-            zoomView = nil
+        // clear the previous image
+        if zoomView.superview != nil {
+            zoomView.removeFromSuperview()
         }
         
         // reset our zoomScale to 1.0 before doing any further calculations
@@ -69,7 +68,7 @@ class ImageScrollView: UIScrollView {
         
         // make a new UIImageView for the new image
         zoomView = UIImageView(image: image)
-        addSubview(zoomView!)
+        addSubview(zoomView)
         
         configureForImageSize(image.size)
     }
@@ -108,10 +107,7 @@ extension ImageScrollView: UIScrollViewDelegate {
 
 private extension ImageScrollView {
     
-    func centerImage() {
-        // avoid setting zoomView's frame if it hasn't been initilized
-        guard let zoomView = zoomView else { return }
-        
+    func centerImage() {        
         // center the zoom view as it becomes smaller than the size of the screen
         let boundsSize = bounds.size
         var frameToCenter = zoomView.frame

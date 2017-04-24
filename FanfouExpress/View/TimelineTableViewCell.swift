@@ -34,7 +34,7 @@ class TimelineTableViewCell: UITableViewCell {
         return previewImageView
     }
     
-    var tapPreviewImageBlock: (() -> Void)?
+    var tapPreviewImageBlock: ((UIImageView) -> Void)?
 
     private var contentLabel: DTAttributedLabel
     private var screenNameLabel: UILabel
@@ -46,7 +46,7 @@ class TimelineTableViewCell: UITableViewCell {
         self.previewImageView = UIImageView()
         self.contentInsets = CellStyle.ContentInsets
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.contentLabel.numberOfLines = 0
         
         self.screenNameLabel.textAlignment = .right
@@ -104,6 +104,7 @@ class TimelineTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        tapPreviewImageBlock = nil
         contentLabel.attributedString = nil
         screenNameLabel.text = nil
         previewImageView.image = nil
@@ -150,7 +151,7 @@ class TimelineTableViewCell: UITableViewCell {
     }
     
     @objc private func tapPreviewImage() {
-        tapPreviewImageBlock?()
+        tapPreviewImageBlock?(previewImageView)
     }
 }
 

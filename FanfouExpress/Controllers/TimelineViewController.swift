@@ -10,14 +10,19 @@ import Foundation
 import UIKit
 import Alamofire
 
-class TimelineViewController: UITableViewController {
+class TimelineViewController: UITableViewController, PhotoBrowserTransitionSupport {
     
     var digest: Digest?
+    var transitionImage: UIImage
+    var transitionImageOriginFrame: CGRect
+    
     var today: String {
         return DateUtils.dateFormatter.string(from: Date())
     }
     
     override init(style: UITableViewStyle) {
+        self.transitionImage = UIImage()
+        self.transitionImageOriginFrame = CGRect.zero
         super.init(style: style)
     }
         
@@ -99,9 +104,13 @@ extension TimelineViewController {
         let cell: TimelineTableViewCell = tableView.dequeue(indexPath: indexPath)
         cell.updateCell(msg)
         if let url = msg.image?.previewURL {
-            cell.tapPreviewImageBlock = {
+            cell.tapPreviewImageBlock = { (tappedImageView) in
+                self.transitionImageOriginFrame = tappedImageView.frame
+                self.transitionImage = tappedImageView.image ?? UIImage.imageWithColor(color: .lightGray)
+                
                 let photoController = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)
                 photoController.modalPresentationStyle = .custom
+                photoController.transitioningDelegate = self
                 photoController.modalPresentationCapturesStatusBarAppearance = true
                 self.present(photoController, animated: true, completion: nil)
             }
@@ -132,20 +141,39 @@ extension TimelineViewController {
 extension TimelineViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        let animator = TimelineAnimator()
-        animator.presenting = true
-        return animator
+        switch presented.self {
+        case is PhotoBrowserController:
+            return PhotoBrowserAnimator()
+        case is FFENavigationController:
+            guard presented.unwrapNavigationControllerIfNeeded() is DetailsViewController else { return nil }
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            let animator = TimelineAnimator()
+            animator.presenting = true
+            return animator
+        default:
+            return nil
+        }
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let animator = TimelineAnimator()
-        animator.presenting = false
-        return animator
+        switch dismissed.self {
+        case is PhotoBrowserController:
+            return PhotoBrowserAnimator()
+        case is FFENavigationController:
+            guard dismissed.unwrapNavigationControllerIfNeeded() is DetailsViewController else { return nil }
+            let animator = TimelineAnimator()
+            animator.presenting = false
+            return animator
+        default:
+            return nil
+        }
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return TimelinePresentationController(presentedViewController: presented, presenting: presenting)
+        if presented.unwrapNavigationControllerIfNeeded() is DetailsViewController {
+            return TimelinePresentationController(presentedViewController: presented, presenting: presenting)
+        }
+        return nil
     }
 }
 

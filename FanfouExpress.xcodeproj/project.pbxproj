@@ -26,6 +26,7 @@
 		8BBA8EAE1E8492A200D505FA /* Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EAD1E8492A200D505FA /* Digest.swift */; };
 		8BBA8EB11E849A7000D505FA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EB01E849A7000D505FA /* Message.swift */; };
 		8BBA8EB31E84A6B600D505FA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA8EB21E84A6B600D505FA /* Router.swift */; };
+		8BBDEB1B1EABB5A100DAB3ED /* PhotoBrowserAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBDEB1A1EABB5A100DAB3ED /* PhotoBrowserAnimator.swift */; };
 		8BD3C6511E84912D0061455A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3C6501E84912D0061455A /* AppDelegate.swift */; };
 		8BD3C65B1E84912D0061455A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3C6591E84912D0061455A /* LaunchScreen.storyboard */; };
 		8BD3C6661E84912D0061455A /* FanfouExpressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3C6651E84912D0061455A /* FanfouExpressTests.swift */; };
@@ -70,6 +71,7 @@
 		8BBA8EAD1E8492A200D505FA /* Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Digest.swift; path = Model/Digest.swift; sourceTree = "<group>"; };
 		8BBA8EB01E849A7000D505FA /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 		8BBA8EB21E84A6B600D505FA /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8BBDEB1A1EABB5A100DAB3ED /* PhotoBrowserAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoBrowserAnimator.swift; path = Controllers/PhotoBrowserAnimator.swift; sourceTree = "<group>"; };
 		8BD3C64D1E84912D0061455A /* FanfouExpress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanfouExpress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD3C6501E84912D0061455A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BD3C65A1E84912D0061455A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -131,10 +133,10 @@
 		8B234A3E1E87384D008DC5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8B15823A1E8D98E300A8267B /* DetailsViewController.swift */,
-				8B2C62551E95DF0E00E4D837 /* TimelineAnimator.swift */,
+				8BBDEB1C1EABF0A300DAB3ED /* Animators */,
 				8B234A3C1E873848008DC5AA /* TimelineViewController.swift */,
 				8B3373271E9730D7001C50AE /* TimelinePresentationController.swift */,
+				8B15823A1E8D98E300A8267B /* DetailsViewController.swift */,
 				8B019DF41EA91385009CD34F /* PhotoBrowserController.swift */,
 				8B1E1B511EA9A1BB000C265C /* FFENavigationController.swift */,
 			);
@@ -168,6 +170,15 @@
 				8B9FB7171E85ABF200DD2090 /* FFEConstants.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		8BBDEB1C1EABF0A300DAB3ED /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				8BBDEB1A1EABB5A100DAB3ED /* PhotoBrowserAnimator.swift */,
+				8B2C62551E95DF0E00E4D837 /* TimelineAnimator.swift */,
+			);
+			name = Animators;
 			sourceTree = "<group>";
 		};
 		8BD3C6441E84912C0061455A = {
@@ -568,6 +579,7 @@
 				8BBA8EB31E84A6B600D505FA /* Router.swift in Sources */,
 				8BD3C6511E84912D0061455A /* AppDelegate.swift in Sources */,
 				8B3373281E9730D7001C50AE /* TimelinePresentationController.swift in Sources */,
+				8BBDEB1B1EABB5A100DAB3ED /* PhotoBrowserAnimator.swift in Sources */,
 				8B04F6D71E921CCA0079EED6 /* Helpers.swift in Sources */,
 				8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */,
 				8B7C50181E8E20FB004F4CFE /* DetailsTableViewCell.swift in Sources */,

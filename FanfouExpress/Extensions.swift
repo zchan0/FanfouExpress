@@ -122,6 +122,14 @@ extension UIViewController {
     func showErrorMsg(withStatus status: String) {
         SVProgressHUD.showError(withStatus: status)
     }
+    
+    /// if viewController is UINavigationController, return its topViewController
+    func unwrapNavigationControllerIfNeeded() -> UIViewController {
+        guard self is UINavigationController  else { return self }
+        guard let naviVC = self as? UINavigationController else { return self }
+        guard let top = naviVC.topViewController else { return self }
+        return top
+    }
 }
 
 extension UINavigationController {

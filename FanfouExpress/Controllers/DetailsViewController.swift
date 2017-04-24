@@ -127,7 +127,7 @@ private extension DetailsViewController {
         contentCell.updateCell(msg)
         
         if let url = msg.image?.previewURL {
-            contentCell.tapPreviewImageBlock = {
+            contentCell.tapPreviewImageBlock = { (tappedImageView) in
                 let controller = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)
                 controller.modalPresentationStyle = .custom
                 self.present(controller, animated: true, completion: nil)

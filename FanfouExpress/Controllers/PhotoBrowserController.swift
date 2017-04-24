@@ -15,6 +15,10 @@ class PhotoBrowserController: UIViewController {
     private let placeholderImage: UIImage
     private let imageScrollView: ImageScrollView
     
+    var displayingImageView: UIImageView {
+        return imageScrollView.imageView
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -35,6 +39,7 @@ class PhotoBrowserController: UIViewController {
         
         imageScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageScrollView.displayImage(placeholderImage)
+        imageScrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissAction)))
         
         view.addSubview(imageScrollView)
         view.backgroundColor = UIColor.black
@@ -49,7 +54,6 @@ class PhotoBrowserController: UIViewController {
             }
             
             guard let image = UIImage(data: data) else { return }
-            
             DispatchQueue.main.async {
                 self.stopLoading()
                 self.imageScrollView.displayImage(image)
@@ -61,5 +65,14 @@ class PhotoBrowserController: UIViewController {
         super.viewDidLayoutSubviews()
         
         imageScrollView.frame = view.bounds
+    }
+    
+    func setImageScrollViewHidden(_ hidden: Bool) {
+        imageScrollView.isHidden = hidden
+    }
+    
+    /// in order to use custom transition animator, must set animated to be true
+    @objc private func dismissAction() {
+        dismiss(animated: true, completion: nil)
     }
 }
