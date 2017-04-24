@@ -9,17 +9,21 @@
 import UIKit
 
 class ImageScrollView: UIScrollView {
+
+    var imageView: UIImageView? {
+        return zoomView
+    }
     
-    var zoomView: UIImageView?
-    var imageSize: CGSize = CGSize.zero
-    var pointToCenterAfterResize: CGPoint = CGPoint.zero
-    var scaleToRestoreAfterResize: CGFloat = 0
+    fileprivate var zoomView: UIImageView?
+    fileprivate var imageSize: CGSize = CGSize.zero
+    fileprivate var pointToCenterAfterResize: CGPoint = CGPoint.zero
+    fileprivate var scaleToRestoreAfterResize: CGFloat = 0
     
-    var maximumContentOffset: CGPoint {
+    fileprivate var maximumContentOffset: CGPoint {
         return CGPoint(x: contentSize.width - bounds.width, y: contentSize.height - bounds.height)
     }
     
-    var minimumContentOffset: CGPoint {
+    fileprivate var minimumContentOffset: CGPoint {
         return CGPoint.zero
     }
     
@@ -48,6 +52,63 @@ class ImageScrollView: UIScrollView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        centerImage()
+    }
+
+    func displayImage(_ image: UIImage) {
+        // clear the previous iamge
+        if let _ = zoomView {
+            zoomView!.removeFromSuperview()
+            zoomView = nil
+        }
+        
+        // reset our zoomScale to 1.0 before doing any further calculations
+        zoomScale = 1.0
+        minimumZoomScale = 1.0
+        maximumZoomScale = 1.0
+        
+        // make a new UIImageView for the new image
+        zoomView = UIImageView(image: image)
+        addSubview(zoomView!)
+        
+        configureForImageSize(image.size)
+    }
+    
+    class func scale(forBounds bounds: CGRect, _ imageSize: CGSize) -> (minScale: CGFloat, maxScale: CGFloat) {
+        // calculate min/max zoomscale
+        let xScale: CGFloat = bounds.width / imageSize.width // the scale needed to perfectly fit the image width-wise
+        let yScale: CGFloat = bounds.height / imageSize.height  // the scale needed to perfectly fit the image height-wise
+        
+        // fill width if the image and phone are both portrait or both landscape; otherwise take smaller scale
+        let imagePortrait = imageSize.height > imageSize.width
+        let phonePortrait = bounds.height > bounds.width
+        var minScale: CGFloat = imagePortrait == phonePortrait ? xScale : fmin(xScale, yScale)
+        
+        let maxScale: CGFloat = CGFloat(1.0 + 1.0.ulp)
+        
+        // don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
+        if minScale > maxScale {
+            minScale = maxScale
+        }
+        
+        return (minScale, maxScale)
+    }
+}
+
+extension ImageScrollView: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return zoomView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        centerImage()
+    }
+}
+
+private extension ImageScrollView {
+    
+    func centerImage() {
         // avoid setting zoomView's frame if it hasn't been initilized
         guard let zoomView = zoomView else { return }
         
@@ -71,35 +132,6 @@ class ImageScrollView: UIScrollView {
         
         zoomView.frame = frameToCenter
     }
-
-    func displayImage(_ image: UIImage) {
-        // clear the previous iamge
-        if let _ = zoomView {
-            zoomView!.removeFromSuperview()
-            zoomView = nil
-        }
-        
-        // reset our zoomScale to 1.0 before doing any further calculations
-        zoomScale = 1.0
-        minimumZoomScale = 1.0
-        maximumZoomScale = 1.0
-        
-        // make a new UIImageView for the new image
-        zoomView = UIImageView(image: image)
-        addSubview(zoomView!)
-        
-        configureForImageSize(image.size)
-    }
-}
-
-extension ImageScrollView: UIScrollViewDelegate {
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return zoomView
-    }
-}
-
-private extension ImageScrollView {
     
     func configureForImageSize(_ size: CGSize) {
         imageSize = size
@@ -109,24 +141,10 @@ private extension ImageScrollView {
     }
     
     func setMaxMinZoomScalesForCurrentBounds() {
-        // calculate min/max zoomscale
-        let xScale: CGFloat = bounds.width / imageSize.width // the scale needed to perfectly fit the image width-wise
-        let yScale: CGFloat = bounds.height / imageSize.height  // the scale needed to perfectly fit the image height-wise
+        let scaleMinMax = ImageScrollView.scale(forBounds: bounds, imageSize)
         
-        // fill width if the image and phone are both portrait or both landscape; otherwise take smaller scale
-        let imagePortrait = imageSize.height > imageSize.width
-        let phonePortrait = bounds.height > bounds.width
-        var minScale: CGFloat = imagePortrait == phonePortrait ? xScale : fmin(xScale, yScale)
-        
-        let maxScale: CGFloat = 1.0
-        
-        // don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
-        if minScale > maxScale {
-            minScale = maxScale
-        }
-        
-        minimumZoomScale = minScale
-        maximumZoomScale = maxScale
+        minimumZoomScale = scaleMinMax.minScale
+        maximumZoomScale = scaleMinMax.maxScale
     }
     
     func prepareToResize() {
