@@ -116,7 +116,12 @@ extension UIViewController {
     }
     
     func stopLoading() {
+        SVProgressHUD.setMaximumDismissTimeInterval(0.5)
         SVProgressHUD.dismiss()
+    }
+    
+    func showSuccessMsg(withStatus status: String) {
+        SVProgressHUD.showSuccess(withStatus: status)
     }
     
     func showErrorMsg(withStatus status: String) {
