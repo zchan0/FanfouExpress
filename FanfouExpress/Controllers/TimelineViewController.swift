@@ -10,14 +10,19 @@ import Foundation
 import UIKit
 import Alamofire
 
-class TimelineViewController: UITableViewController {
+class TimelineViewController: UITableViewController, PhotoBrowserTransitionSupport {
     
     var digest: Digest?
+    var transitionImage: UIImage
+    var transitionImageView: UIImageView
+    
     var today: String {
         return DateUtils.dateFormatter.string(from: Date())
     }
     
     override init(style: UITableViewStyle) {
+        self.transitionImage = UIImage()
+        self.transitionImageView = UIImageView()
         super.init(style: style)
     }
         
@@ -98,6 +103,18 @@ extension TimelineViewController {
         let msg = msgs[indexPath.row]
         let cell: TimelineTableViewCell = tableView.dequeue(indexPath: indexPath)
         cell.updateCell(msg)
+        if let url = msg.image?.previewURL {
+            cell.tapPreviewImageBlock = { (tappedImageView) in
+                self.transitionImageView = tappedImageView
+                self.transitionImage = tappedImageView.image ?? UIImage.imageWithColor(color: .lightGray)
+                
+                let photoController = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)
+                photoController.modalPresentationStyle = .custom
+                photoController.transitioningDelegate = self
+                photoController.modalPresentationCapturesStatusBarAppearance = true
+                self.present(photoController, animated: true, completion: nil)
+            }
+        }
         
         return cell
     }
@@ -110,10 +127,11 @@ extension TimelineViewController {
         
         let msg = msgs[indexPath.row]
         let detailsViewController = DetailsViewController(style: .plain)
-        let navigationViewController = UINavigationController(rootViewController: detailsViewController)
+        let navigationViewController = FFENavigationController(rootViewController: detailsViewController)
         detailsViewController.msg = msg
         navigationViewController.transitioningDelegate = self
         navigationViewController.modalPresentationStyle = .custom
+        navigationViewController.modalPresentationCapturesStatusBarAppearance = true
         present(navigationViewController, animated: true, completion: nil)
     }
 }
@@ -123,20 +141,39 @@ extension TimelineViewController {
 extension TimelineViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        let animator = TimelineAnimator()
-        animator.presenting = true
-        return animator
+        switch presented.self {
+        case is PhotoBrowserController:
+            return PhotoBrowserAnimator()
+        case is FFENavigationController:
+            guard presented.unwrapNavigationControllerIfNeeded() is DetailsViewController else { return nil }
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            let animator = TimelineAnimator()
+            animator.presenting = true
+            return animator
+        default:
+            return nil
+        }
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let animator = TimelineAnimator()
-        animator.presenting = false
-        return animator
+        switch dismissed.self {
+        case is PhotoBrowserController:
+            return PhotoBrowserAnimator()
+        case is FFENavigationController:
+            guard dismissed.unwrapNavigationControllerIfNeeded() is DetailsViewController else { return nil }
+            let animator = TimelineAnimator()
+            animator.presenting = false
+            return animator
+        default:
+            return nil
+        }
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return TimelinePresentationController(presentedViewController: presented, presenting: presenting)
+        if presented.unwrapNavigationControllerIfNeeded() is DetailsViewController {
+            return TimelinePresentationController(presentedViewController: presented, presenting: presenting)
+        }
+        return nil
     }
 }
 
@@ -159,11 +196,8 @@ private extension TimelineViewController {
         let router = Router.fetchDailyDigests(date: date)
         
         startLoading()
-        
         Alamofire.request(router).validate().responseJSON { (response) in
-            
             self.stopLoading()
-            
             switch response.result {
             case .success:
                 guard let json = response.value as? JSON else { return }
@@ -172,7 +206,7 @@ private extension TimelineViewController {
                     completionHandler()
                 }
             case .failure:
-                print("reponse error")
+                self.showErrorMsg(withStatus: "加载失败")
             }
         }
     }

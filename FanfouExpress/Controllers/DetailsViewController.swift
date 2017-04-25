@@ -10,7 +10,7 @@ import UIKit
 import DTCoreText
 import SafariServices
 
-class DetailsViewController: UITableViewController {
+class DetailsViewController: UITableViewController, PhotoBrowserTransitionSupport {
     
     enum RowType: Int {
         case header  = 0
@@ -19,10 +19,19 @@ class DetailsViewController: UITableViewController {
     }
     
     var msg: Message?
-    var dataArray: [UITableViewCell]
+    var transitionImage: UIImage
+    var transitionImageView: UIImageView
+    
+    fileprivate var dataArray: [UITableViewCell]
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override init(style: UITableViewStyle) {
         self.msg = nil
+        self.transitionImage = UIImage()
+        self.transitionImageView = UIImageView()
         self.dataArray = [UITableViewCell]()
         super.init(style: style)
     }
@@ -40,7 +49,7 @@ class DetailsViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
         
-        loadData()
+        setupDataArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +92,26 @@ extension DetailsViewController {
     }
 }
 
+// MARK: - Transition delegate
+
+extension DetailsViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if presented is PhotoBrowserController {
+            return PhotoBrowserAnimator()
+        }
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if dismissed is PhotoBrowserController {
+            return PhotoBrowserAnimator()
+        }
+        return nil
+    }
+    
+}
+
 // MARK: - DTAttributedTextContentViewDelegate
 
 extension DetailsViewController: DTAttributedTextContentViewDelegate {
@@ -108,7 +137,7 @@ extension DetailsViewController: SFSafariViewControllerDelegate {
 
 private extension DetailsViewController {
     
-    func loadData() {
+    func setupDataArray() {
         guard let msg = msg else {
             return
         }
@@ -120,6 +149,18 @@ private extension DetailsViewController {
         contentCell.textDelegate = self
         contentCell.contentInsets = DetailCellStyle.ContentInsets
         contentCell.updateCell(msg)
+        
+        if let url = msg.image?.previewURL {
+            contentCell.tapPreviewImageBlock = { (tappedImageView) in
+                self.transitionImageView = tappedImageView
+                self.transitionImage = tappedImageView.image ?? UIImage.imageWithColor(color: .lightGray)
+                
+                let controller = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)
+                controller.modalPresentationStyle = .custom
+                controller.transitioningDelegate = self
+                self.present(controller, animated: true, completion: nil)
+            }
+        }
         
         dataArray = [headerCell, contentCell]
     }
@@ -154,7 +195,7 @@ private extension DetailsViewController {
         if let statusURL = msg.statusURL {
             activityItems.append(statusURL)
         }
-        if  let image = contentCell.previewImage {
+        if  let image = contentCell.imageView?.image {
             activityItems.append(image)
         }
         

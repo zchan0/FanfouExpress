@@ -52,16 +52,35 @@ extension UIFont {
     }
 }
 
+extension UIImage {
+    
+    class func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 1, height: 1))
+        UIGraphicsBeginImageContext(rect.size)
+        
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
+    }
+}
+
 extension UIImageView {
     
     func setImage(withURL URL: URL) {
         Alamofire.request(URL).validate().responseData { (response) in
             guard let data = response.value else {
-                print("Failed to download image")
                 return
             }
+            
             let image = UIImage(data: data)
-            self.image = image
+            DispatchQueue.main.async {
+                self.image = image
+            }
         }
     }
 }
@@ -88,7 +107,7 @@ extension UITableView {
 extension UIViewController {
     
     func startLoading() {
-        startLoading(withStatus: "Loading..")
+        startLoading(withStatus: "加载中...")
     }
     
     func startLoading(withStatus status: String) {
@@ -99,20 +118,22 @@ extension UIViewController {
     func stopLoading() {
         SVProgressHUD.dismiss()
     }
+    
+    func showErrorMsg(withStatus status: String) {
+        SVProgressHUD.showError(withStatus: status)
+    }
+    
+    /// if viewController is UINavigationController, return its topViewController
+    func unwrapNavigationControllerIfNeeded() -> UIViewController {
+        guard self is UINavigationController  else { return self }
+        guard let naviVC = self as? UINavigationController else { return self }
+        guard let top = naviVC.topViewController else { return self }
+        return top
+    }
 }
 
 extension UINavigationController {
-    
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        // Change status bar style to .lightContent
-        // Work with setNeedsStatusBarAppearanceUpdate()
-        if visibleViewController is TimelineViewController
-            && presentedViewController == nil {
-            return .default
-        }
-        return .lightContent
-    }
-    
+        
     func removeBorder() {
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
