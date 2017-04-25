@@ -89,6 +89,11 @@ class ImageScrollView: UIScrollView {
         if minScale > maxScale {
             minScale = maxScale
         }
+        // An error may happen with affine transformations when scaling UIScrollView instance to 0
+        // See: http://stackoverflow.com/a/38502345
+        else if minScale < 0.01 {
+            minScale = 0.01
+        }
         
         return (minScale, maxScale)
     }
