@@ -10,7 +10,7 @@ import UIKit
 import DTCoreText
 import SafariServices
 
-class DetailsViewController: UITableViewController {
+class DetailsViewController: UITableViewController, PhotoBrowserTransitionSupport {
     
     enum RowType: Int {
         case header  = 0
@@ -19,6 +19,8 @@ class DetailsViewController: UITableViewController {
     }
     
     var msg: Message?
+    var transitionImage: UIImage
+    var transitionImageView: UIImageView
     
     fileprivate var dataArray: [UITableViewCell]
     
@@ -28,6 +30,8 @@ class DetailsViewController: UITableViewController {
     
     override init(style: UITableViewStyle) {
         self.msg = nil
+        self.transitionImage = UIImage()
+        self.transitionImageView = UIImageView()
         self.dataArray = [UITableViewCell]()
         super.init(style: style)
     }
@@ -88,6 +92,26 @@ extension DetailsViewController {
     }
 }
 
+// MARK: - Transition delegate
+
+extension DetailsViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if presented is PhotoBrowserController {
+            return PhotoBrowserAnimator()
+        }
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if dismissed is PhotoBrowserController {
+            return PhotoBrowserAnimator()
+        }
+        return nil
+    }
+    
+}
+
 // MARK: - DTAttributedTextContentViewDelegate
 
 extension DetailsViewController: DTAttributedTextContentViewDelegate {
@@ -128,8 +152,12 @@ private extension DetailsViewController {
         
         if let url = msg.image?.previewURL {
             contentCell.tapPreviewImageBlock = { (tappedImageView) in
+                self.transitionImageView = tappedImageView
+                self.transitionImage = tappedImageView.image ?? UIImage.imageWithColor(color: .lightGray)
+                
                 let controller = PhotoBrowserController(withURL: url, TLCell.PlaceholderImage)
                 controller.modalPresentationStyle = .custom
+                controller.transitioningDelegate = self
                 self.present(controller, animated: true, completion: nil)
             }
         }
