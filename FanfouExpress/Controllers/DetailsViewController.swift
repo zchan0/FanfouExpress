@@ -200,6 +200,7 @@ private extension DetailsViewController {
         }
         
         let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        controller.modalPresentationStyle = .custom
         controller.completionWithItemsHandler = { (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, activityError: Error?) in
             if completed {
                 print("[UIActivityViewController]: Succeed")
