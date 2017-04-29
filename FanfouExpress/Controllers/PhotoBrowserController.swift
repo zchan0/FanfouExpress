@@ -20,8 +20,8 @@ class PhotoBrowserController: UIViewController {
         return imageScrollView.imageView
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     init(withURL url: URL, _ placeholder: UIImage) {
@@ -41,7 +41,12 @@ class PhotoBrowserController: UIViewController {
         imageScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageScrollView.displayImage(placeholderImage)
         // add gestures
-        imageScrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(receiveSingleTap)))
+        let  singleTap = UITapGestureRecognizer(target: self, action: #selector(receiveSingleTap))
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(receiveDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        singleTap.require(toFail: doubleTap)
+        imageScrollView.addGestureRecognizer(doubleTap)
+        imageScrollView.addGestureRecognizer(singleTap)
         imageScrollView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(receiveLongPress)))
         
         view.addSubview(imageScrollView)
@@ -77,6 +82,15 @@ class PhotoBrowserController: UIViewController {
     /// in order to use custom transition animator, must set animated to be true
     @objc private func receiveSingleTap() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func receiveDoubleTap(gesture: UIGestureRecognizer) {
+        if imageScrollView.zoomScale > imageScrollView.minimumZoomScale {
+            imageScrollView.setZoomScale(imageScrollView.minimumZoomScale, animated: true)
+        } else {
+            let rect = imageScrollView.zoomRect(forPoint: gesture.location(in: imageScrollView), withScale: 4.0 * imageScrollView.zoomScale)
+            imageScrollView.zoom(to: rect, animated: true)
+        }
     }
     
     @objc private func receiveLongPress(gesture: UILongPressGestureRecognizer) {

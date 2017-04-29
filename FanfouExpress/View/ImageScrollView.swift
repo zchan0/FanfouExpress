@@ -73,6 +73,15 @@ class ImageScrollView: UIScrollView {
         configureForImageSize(image.size)
     }
     
+    func zoomRect(forPoint point: CGPoint, withScale scale: CGFloat) -> CGRect {
+        let w = frame.width / scale
+        let h = frame.height / scale
+        let center = imageView.convert(point, from: self)
+        let x = center.x - w / 2.0
+        let y = center.y - h / 2.0
+        return CGRect(x: x, y: y, width: w, height: h)
+    }
+    
     class func scale(forBounds bounds: CGRect, _ imageSize: CGSize) -> (minScale: CGFloat, maxScale: CGFloat) {
         // calculate min/max zoomscale
         let xScale: CGFloat = bounds.width / imageSize.width // the scale needed to perfectly fit the image width-wise
