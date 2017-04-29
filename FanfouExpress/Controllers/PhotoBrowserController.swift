@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Photos
+import FLAnimatedImage
 
 class PhotoBrowserController: UIViewController {
     
@@ -39,7 +40,8 @@ class PhotoBrowserController: UIViewController {
         super.viewDidLoad()
         
         imageScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        imageScrollView.displayImage(placeholderImage)
+        imageScrollView.display(placeholderImage)
+        
         // add gestures
         let  singleTap = UITapGestureRecognizer(target: self, action: #selector(receiveSingleTap))
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(receiveDoubleTap))
@@ -61,10 +63,17 @@ class PhotoBrowserController: UIViewController {
                 return
             }
             
-            guard let image = UIImage(data: data) else { return }
+            var image: AnyObject
+            if data.isGifData() {
+                image = FLAnimatedImage(animatedGIFData: data)
+            } else {
+                guard let img = UIImage(data: data) else { return }
+                image = img
+            }
+            
             DispatchQueue.main.async {
                 self.stopLoading()
-                self.imageScrollView.displayImage(image)
+                self.imageScrollView.display(image)
             }
         }
     }
@@ -85,7 +94,7 @@ class PhotoBrowserController: UIViewController {
     }
     
     @objc private func receiveDoubleTap(gesture: UIGestureRecognizer) {
-        if imageScrollView.zoomScale > imageScrollView.minimumZoomScale {
+        if imageScrollView.zoomScale >= imageScrollView.maximumZoomScale {
             imageScrollView.setZoomScale(imageScrollView.minimumZoomScale, animated: true)
         } else {
             let rect = imageScrollView.zoomRect(forPoint: gesture.location(in: imageScrollView), withScale: 4.0 * imageScrollView.zoomScale)

@@ -69,6 +69,14 @@ extension UIImage {
     }
 }
 
+extension Data {
+    
+    func isGifData() -> Bool {
+        let ext = [UInt8](self)[0]
+        return ext == 0x47
+    }
+}
+
 extension UIImageView {
     
     func setImage(withURL URL: URL) {
