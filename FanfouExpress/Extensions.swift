@@ -69,6 +69,14 @@ extension UIImage {
     }
 }
 
+extension Data {
+    
+    func isGifData() -> Bool {
+        let ext = [UInt8](self)[0]
+        return ext == 0x47
+    }
+}
+
 extension UIImageView {
     
     func setImage(withURL URL: URL) {
@@ -116,7 +124,12 @@ extension UIViewController {
     }
     
     func stopLoading() {
+        SVProgressHUD.setMaximumDismissTimeInterval(0.5)
         SVProgressHUD.dismiss()
+    }
+    
+    func showSuccessMsg(withStatus status: String) {
+        SVProgressHUD.showSuccess(withStatus: status)
     }
     
     func showErrorMsg(withStatus status: String) {

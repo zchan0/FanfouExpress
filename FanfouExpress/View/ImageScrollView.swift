@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLAnimatedImage
 
 class ImageScrollView: UIScrollView {
 
@@ -55,7 +56,7 @@ class ImageScrollView: UIScrollView {
         centerImage()
     }
 
-    func displayImage(_ image: UIImage) {
+    func display(_ image: AnyObject) {
         // clear the previous image
         if zoomView.superview != nil {
             zoomView.removeFromSuperview()
@@ -67,10 +68,30 @@ class ImageScrollView: UIScrollView {
         maximumZoomScale = 1.0
         
         // make a new UIImageView for the new image
-        zoomView = UIImageView(image: image)
-        addSubview(zoomView)
+        switch image {
+        case let staticImage as UIImage:
+            zoomView = UIImageView(image: staticImage)
+            configureForImageSize(staticImage.size)
+        case let animatedImage as FLAnimatedImage:
+            zoomView = FLAnimatedImageView(frame: CGRect(origin: CGPoint.zero, size: animatedImage.size))
+            guard let zoomView = zoomView as? FLAnimatedImageView else { return }
+            zoomView.animatedImage = animatedImage
+            configureForImageSize(animatedImage.size)
+        default:
+            print("Unsupport image type \(image.self)")
+            return
+        }
         
-        configureForImageSize(image.size)
+        addSubview(zoomView)
+    }
+    
+    func zoomRect(forPoint point: CGPoint, withScale scale: CGFloat) -> CGRect {
+        let w = frame.width / scale
+        let h = frame.height / scale
+        let center = imageView.convert(point, from: self)
+        let x = center.x - w / 2.0
+        let y = center.y - h / 2.0
+        return CGRect(x: x, y: y, width: w, height: h)
     }
     
     class func scale(forBounds bounds: CGRect, _ imageSize: CGSize) -> (minScale: CGFloat, maxScale: CGFloat) {
@@ -83,7 +104,7 @@ class ImageScrollView: UIScrollView {
         let phonePortrait = bounds.height > bounds.width
         var minScale: CGFloat = imagePortrait == phonePortrait ? xScale : fmin(xScale, yScale)
         
-        let maxScale: CGFloat = CGFloat(1.0 + 1.0.ulp)
+        let maxScale: CGFloat = 1.0
         
         // don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
         if minScale > maxScale {
