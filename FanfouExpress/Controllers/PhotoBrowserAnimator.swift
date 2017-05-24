@@ -105,8 +105,7 @@ private extension PhotoBrowserAnimator {
         
         let initialFrame = containerView.convert(transitionDelegate.transitionImageView.bounds, from: transitionDelegate.transitionImageView)
         let finalFrame = endFrame(forImageView: animateImageView, toVC.view.frame)
-        
-        
+
         toVC.view.alpha = 0.0
         animateImageView.frame = initialFrame
         containerView.addSubview(toVC.view)

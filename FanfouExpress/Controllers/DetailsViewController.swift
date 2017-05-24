@@ -168,7 +168,6 @@ private extension DetailsViewController {
     func setupNavigationBar() {
         navigationController?.removeBorder()
         navigationController?.hidesBarsOnSwipe = true
-        navigationController?.navigationBar.isTranslucent = false
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = 5

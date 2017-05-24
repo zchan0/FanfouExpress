@@ -18,6 +18,7 @@
 		8B234A3A1E86D2DC008DC5AA /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */; };
 		8B234A3D1E873848008DC5AA /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234A3C1E873848008DC5AA /* TimelineViewController.swift */; };
 		8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B234ABC1E88027D008DC5AA /* Extensions.swift */; };
+		8B2905741ECC9CC0008B537B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2905731ECC9CC0008B537B /* EmptyView.swift */; };
 		8B2C62561E95DF0E00E4D837 /* TimelineAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C62551E95DF0E00E4D837 /* TimelineAnimator.swift */; };
 		8B3373281E9730D7001C50AE /* TimelinePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3373271E9730D7001C50AE /* TimelinePresentationController.swift */; };
 		8B7C50181E8E20FB004F4CFE /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C50171E8E20FB004F4CFE /* DetailsTableViewCell.swift */; };
@@ -63,6 +64,7 @@
 		8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineTableViewCell.swift; path = View/TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		8B234A3C1E873848008DC5AA /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = Controllers/TimelineViewController.swift; sourceTree = "<group>"; };
 		8B234ABC1E88027D008DC5AA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8B2905731ECC9CC0008B537B /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = View/EmptyView.swift; sourceTree = "<group>"; };
 		8B2C62551E95DF0E00E4D837 /* TimelineAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineAnimator.swift; path = Controllers/TimelineAnimator.swift; sourceTree = "<group>"; };
 		8B3373271E9730D7001C50AE /* TimelinePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelinePresentationController.swift; path = Controllers/TimelinePresentationController.swift; sourceTree = "<group>"; };
 		8B7C50171E8E20FB004F4CFE /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsTableViewCell.swift; path = View/DetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				8B234A391E86D2DC008DC5AA /* TimelineTableViewCell.swift */,
 				8B7C50171E8E20FB004F4CFE /* DetailsTableViewCell.swift */,
 				8B1E1B4D1EA9438C000C265C /* ImageScrollView.swift */,
+				8B2905731ECC9CC0008B537B /* EmptyView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				8BBDEB1B1EABB5A100DAB3ED /* PhotoBrowserAnimator.swift in Sources */,
 				8B04F6D71E921CCA0079EED6 /* Helpers.swift in Sources */,
 				8B234ABD1E88027D008DC5AA /* Extensions.swift in Sources */,
+				8B2905741ECC9CC0008B537B /* EmptyView.swift in Sources */,
 				8B7C50181E8E20FB004F4CFE /* DetailsTableViewCell.swift in Sources */,
 				8B234A3D1E873848008DC5AA /* TimelineViewController.swift in Sources */,
 				8BBA8EAE1E8492A200D505FA /* Digest.swift in Sources */,
