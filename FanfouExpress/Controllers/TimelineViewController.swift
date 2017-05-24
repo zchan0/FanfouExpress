@@ -20,10 +20,17 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
         return DateUtils.dateFormatter.string(from: Date())
     }
     
+    fileprivate let emptyView: EmptyView
+    
     override init(style: UITableViewStyle) {
+        self.emptyView = EmptyView()
         self.transitionImage = UIImage()
         self.transitionImageView = UIImageView()
         super.init(style: style)
+        
+        self.emptyView.refreshBlock = { _ in
+            self.reloadData()
+        }
     }
         
     required init?(coder aDecoder: NSCoder) {
@@ -33,10 +40,11 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configNavigationBar()
+        // navigation bar
+        title = "今日精选"
+        navigationController?.hidesBarsOnSwipe = true
         
-        view.backgroundColor = UIColor.clear
-        
+        // tableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
@@ -45,9 +53,15 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TimelineTableViewCell.self)
         
-        fetchDigest(today, {
-            self.tableView.reloadData()
-        })
+        view.backgroundColor = UIColor.clear
+        
+        loadRemoteData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        emptyView.frame = view.bounds
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -181,15 +195,14 @@ extension TimelineViewController: UIViewControllerTransitioningDelegate {
 
 private extension TimelineViewController {
     
-    func configNavigationBar() {
-        title = "今日精选"
-        
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: NavigationBarAppearance.TitleFont
-        ]
-        
-        navigationController?.hidesBarsOnSwipe = true
-        navigationController?.navigationBar.isTranslucent = false
+    func loadRemoteData() {
+        fetchDigest(today, {
+            self.tableView.reloadData()
+        })
+    }
+    
+    func reloadData() {
+        loadRemoteData()
     }
     
     func fetchDigest(_ date: String, _ completionHandler: @escaping () -> Void) {
@@ -202,11 +215,25 @@ private extension TimelineViewController {
             case .success:
                 guard let json = response.value as? JSON else { return }
                 if let digest = Digest(json: json) {
-                    self.digest = digest
-                    completionHandler()
+                    if digest.msgs.isEmpty {
+                        self.emptyView.style = .defaultStyle
+                        if self.emptyView.superview == nil {
+                            self.view.addSubview(self.emptyView)
+                        }
+                    } else {
+                        if self.emptyView.superview != nil {
+                            self.emptyView.removeFromSuperview()
+                        }
+                        self.digest = digest
+                        completionHandler()
+                    }
                 }
             case .failure:
                 self.showErrorMsg(withStatus: "加载失败")
+                self.emptyView.style = .errorStyle
+                if self.emptyView.superview == nil {
+                    self.view.addSubview(self.emptyView)
+                }
             }
         }
     }

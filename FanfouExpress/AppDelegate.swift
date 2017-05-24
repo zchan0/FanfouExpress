@@ -25,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navigationController
         
+        // Navigation bar
+        UINavigationBar.appearance().titleTextAttributes =  [
+            NSFontAttributeName: NavigationBarAppearance.TitleFont
+        ]
+        navigationController.navigationBar.isTranslucent = false
+
         // Crashlytics
         Fabric.with([Crashlytics.self])
         
