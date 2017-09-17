@@ -53,7 +53,7 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TimelineTableViewCell.self)
         
-        view.backgroundColor = UIColor.clear
+        view.backgroundColor = .white
         
         loadRemoteData()
     }
