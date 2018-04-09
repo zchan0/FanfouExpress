@@ -20,7 +20,7 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
         return DateUtils.dateFormatter.string(from: Date())
     }
     var lastDay: String {
-        return "2018-02-10"
+        return "2018-02-11"
     }
     
     fileprivate let emptyView: EmptyView
@@ -73,17 +73,7 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
     
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            guard let startDate  = DateUtils.dateFormatter.date(from: Constants.StartDate) else { return }
-            guard let randomDate = DateUtils.shared.randomDay(startDate, Date()) else { return }
-            
-            let randomDateString = DateUtils.dateFormatter.string(from: randomDate)
-            fetchDigest(randomDateString, { [weak self, randomDate] in
-                guard let `self` = self else { return }
-                self.title = DateUtils.chineseDateFormatter.string(from: randomDate)
-                self.tableView.reloadData()
-                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.navigationController?.setNavigationBarHidden(false, animated: false)
-            })
+            showRandomDigest()
         }
     }
 }
@@ -198,10 +188,26 @@ extension TimelineViewController: UIViewControllerTransitioningDelegate {
 
 private extension TimelineViewController {
     
-    func loadRemoteData() {
-        fetchDigest(lastDay, {
+    func showRandomDigest() {
+        guard let startDate  = DateUtils.dateFormatter.date(from: Constants.StartDate) else { return }
+        guard let lastDate = DateUtils.dateFormatter.date(from: lastDay) else { return }
+        guard let randomDate = DateUtils.shared.randomDay(startDate, lastDate) else { return }
+        
+        let randomDateString = DateUtils.dateFormatter.string(from: randomDate)
+        fetchDigest(randomDateString, { [weak self, randomDate] in
+            guard let `self` = self else { return }
+            self.title = DateUtils.chineseDateFormatter.string(from: randomDate)
             self.tableView.reloadData()
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
         })
+    }
+    
+    func loadRemoteData() {
+//        fetchDigest(lastDay, {
+//            self.tableView.reloadData()
+//        })
+        showRandomDigest()
     }
     
     func reloadData() {
