@@ -36,7 +36,7 @@ class PhotoBrowserAnimator: UIPercentDrivenInteractiveTransition {
         container.addGestureRecognizer(pan)
     }
     
-    func handleSwipeUpdate(gestureRecognizer: UIGestureRecognizer) {
+    @objc func handleSwipeUpdate(gestureRecognizer: UIGestureRecognizer) {
         guard let container = contextData?.containerView else { return }
         guard let pan = panGesture else { return }
         

@@ -19,6 +19,9 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
     var today: String {
         return DateUtils.dateFormatter.string(from: Date())
     }
+    var lastDay: String {
+        return "2018-02-10"
+    }
     
     fileprivate let emptyView: EmptyView
     
@@ -28,7 +31,7 @@ class TimelineViewController: UITableViewController, PhotoBrowserTransitionSuppo
         self.transitionImageView = UIImageView()
         super.init(style: style)
         
-        self.emptyView.refreshBlock = { _ in
+        self.emptyView.refreshBlock = {
             self.reloadData()
         }
     }
@@ -196,7 +199,7 @@ extension TimelineViewController: UIViewControllerTransitioningDelegate {
 private extension TimelineViewController {
     
     func loadRemoteData() {
-        fetchDigest(today, {
+        fetchDigest(lastDay, {
             self.tableView.reloadData()
         })
     }

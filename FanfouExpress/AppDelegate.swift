@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Navigation bar
         UINavigationBar.appearance().titleTextAttributes =  [
-            NSFontAttributeName: NavigationBarAppearance.TitleFont
+            NSAttributedStringKey.font: NavigationBarAppearance.TitleFont
         ]
         navigationController.navigationBar.isTranslucent = false
 
