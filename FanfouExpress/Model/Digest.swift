@@ -16,7 +16,7 @@ struct Digest {
     
     var description: String {
         let desc = "shift: \(shift), shiftCN: \(shiftCN), date: \(date)\n"
-        let messagesDesc = msgs.flatMap({ $0.description }).joined(separator: ",\n")
+        let messagesDesc = msgs.compactMap({ $0.description }).joined(separator: ",\n")
         return "Digest: { \(desc), \(messagesDesc) }"
     }
     
@@ -29,7 +29,7 @@ struct Digest {
         self.shift = shift
         self.shiftCN = shiftCN
         self.date = date
-        self.msgs = msgs.flatMap({
+        self.msgs = msgs.compactMap({
             if let msgDict = $0 as? JSON {
                 return Message(json: msgDict)
             }

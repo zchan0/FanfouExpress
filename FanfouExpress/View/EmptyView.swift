@@ -20,7 +20,7 @@ class EmptyView: UIView {
         }
     }
     
-    var refreshBlock: (() -> Void)?
+    var refreshBlock: (() -> ())?
     
     private let titleLable: UILabel
     private let subtitleLabel: UILabel
@@ -35,7 +35,7 @@ class EmptyView: UIView {
         titleLable.textAlignment = .center
 
         subtitleLabel.attributedText = NSAttributedString(string: "点击刷新",
-                                                          attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue, NSFontAttributeName: UIFont.defaultFont(ofSize: 18)])
+                                                          attributes: [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue, NSAttributedStringKey.font: UIFont.defaultFont(ofSize: 18)])
         subtitleLabel.textAlignment = .center
         subtitleLabel.textColor = .gray
         
@@ -58,15 +58,15 @@ class EmptyView: UIView {
         let contentSize = bounds.size
         
         subtitleLabel.frame = {
-            let h = subtitleLabel.sizeThatFits(contentSize).height
-            let y = (contentSize.height - h) / 2.0
-            return CGRect(x: 0, y: y, width: contentSize.width, height: h)
+            let labelH = subtitleLabel.sizeThatFits(contentSize).height
+            let originY = (contentSize.height - labelH) / 2.0
+            return CGRect(x: 0, y: originY, width: contentSize.width, height: labelH)
         }()
         
         titleLable.frame = {
-            let h = titleLable.sizeThatFits(contentSize).height
-            let y = subtitleLabel.frame.minY - 5.0 - h
-            return CGRect(x: 0, y: y, width: contentSize.width, height: h)
+            let labelH = titleLable.sizeThatFits(contentSize).height
+            let originY = subtitleLabel.frame.minY - 5.0 - labelH
+            return CGRect(x: 0, y: originY, width: contentSize.width, height: labelH)
         }()
     }
     

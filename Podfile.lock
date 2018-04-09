@@ -1,28 +1,28 @@
 PODS:
-  - Alamofire (4.4.0)
-  - Crashlytics (3.8.4):
-    - Fabric (~> 1.6.3)
-  - DTCoreText (1.6.20):
-    - DTCoreText/Core (= 1.6.20)
+  - Alamofire (4.7.1)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - DTCoreText (1.6.21):
+    - DTCoreText/Core (= 1.6.21)
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTCoreText/Core (1.6.20):
+  - DTCoreText/Core (1.6.21):
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTFoundation/Core (1.7.12)
-  - DTFoundation/DTAnimatedGIF (1.7.12)
-  - DTFoundation/DTHTMLParser (1.7.12):
+  - DTFoundation/Core (1.7.13)
+  - DTFoundation/DTAnimatedGIF (1.7.13)
+  - DTFoundation/DTHTMLParser (1.7.13):
     - DTFoundation/Core
-  - DTFoundation/UIKit (1.7.12):
+  - DTFoundation/UIKit (1.7.13):
     - DTFoundation/Core
-  - Fabric (1.6.11)
+  - Fabric (1.7.6)
   - FLAnimatedImage (1.0.12)
-  - Reveal-SDK (8)
-  - SVProgressHUD (2.1.2)
+  - Reveal-SDK (14)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
@@ -34,15 +34,15 @@ DEPENDENCIES:
   - SVProgressHUD
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
-  DTCoreText: 51904f2374af443e0d270d6fdc76035ab6f9ef8a
-  DTFoundation: 26a164ef510877387906fb92bff524a792db4bf8
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
+  DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  Reveal-SDK: 43be4e662864e937960d0d04d005135e29c4e53b
-  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  Reveal-SDK: 55b5c5545233b680c2f8da734f202acc15d422b7
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
 PODFILE CHECKSUM: 86faa6f409ccaa560938ab60c77f958af9a05d98
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0
