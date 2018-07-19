@@ -12,7 +12,6 @@ target 'FanfouExpress' do
   pod 'Fabric'
   pod 'Crashlytics' 
   pod 'SVProgressHUD'
-  pod 'Reveal-SDK', :configurations => ['Debug']
 
   target 'FanfouExpressTests' do
     inherit! :search_paths

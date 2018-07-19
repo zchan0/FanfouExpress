@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E5691735C98F8AB9EAEFA91 /* Pods_FanfouExpressTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39DA2307EFC0987BDCE410F /* Pods_FanfouExpressTests.framework */; };
-		5FA1A0479C41C9D6C6727968 /* Pods_FanfouExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */; };
-		7FC4302DC8A33409E0CA805B /* Pods_FanfouExpressUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */; };
+		0862BB77686897F9E1CA33E1 /* Pods_FanfouExpress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AE472FEF8FA61DDB883240 /* Pods_FanfouExpress.framework */; };
 		8B019DF51EA91385009CD34F /* PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B019DF41EA91385009CD34F /* PhotoBrowserController.swift */; };
 		8B04F6D71E921CCA0079EED6 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04F6D61E921CCA0079EED6 /* Helpers.swift */; };
 		8B15823B1E8D98E300A8267B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B15823A1E8D98E300A8267B /* DetailsViewController.swift */; };
@@ -33,6 +31,8 @@
 		8BD3C6661E84912D0061455A /* FanfouExpressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3C6651E84912D0061455A /* FanfouExpressTests.swift */; };
 		8BD3C6711E84912D0061455A /* FanfouExpressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3C6701E84912D0061455A /* FanfouExpressUITests.swift */; };
 		8BEB657E1E91D4DE00895861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BEB657D1E91D4DE00895861 /* Assets.xcassets */; };
+		90E2E2D6ACEF022FB547F1FF /* Pods_FanfouExpressUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73753F52A15926E48C24EC7 /* Pods_FanfouExpressUITests.framework */; };
+		DA7A5547BA1A355D1DE303B1 /* Pods_FanfouExpressTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5122E889554C41CFB367730 /* Pods_FanfouExpressTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpressUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		47D360653A542CEA5869F63A /* Pods-FanfouExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.release.xcconfig"; sourceTree = "<group>"; };
+		3BB4796CD9F46551AA3F15EB /* Pods-FanfouExpress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.release.xcconfig"; sourceTree = "<group>"; };
+		6FB54098F148C2B4385AECE7 /* Pods-FanfouExpressTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests.debug.xcconfig"; sourceTree = "<group>"; };
+		718C1F28D9B1C46E09B02290 /* Pods-FanfouExpress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.debug.xcconfig"; sourceTree = "<group>"; };
 		8B019DF41EA91385009CD34F /* PhotoBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoBrowserController.swift; path = Controllers/PhotoBrowserController.swift; sourceTree = "<group>"; };
 		8B04F6D61E921CCA0079EED6 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		8B15823A1E8D98E300A8267B /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = Controllers/DetailsViewController.swift; sourceTree = "<group>"; };
@@ -86,12 +86,12 @@
 		8BD3C6721E84912D0061455A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BE662351E8F5E11001C3F3A /* FanfouExpress-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FanfouExpress-Bridging-Header.h"; sourceTree = "<group>"; };
 		8BEB657D1E91D4DE00895861 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B85525FD73FEEA26159B73E4 /* Pods-FanfouExpressTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests.release.xcconfig"; sourceTree = "<group>"; };
-		BC76A3615025083D1541A67D /* Pods-FanfouExpressUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C4D743942131045245C6D229 /* Pods-FanfouExpress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpress.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress.debug.xcconfig"; sourceTree = "<group>"; };
-		C59F3AAEA359FDD6B376F4BD /* Pods-FanfouExpressUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests.release.xcconfig"; sourceTree = "<group>"; };
-		DC415776A9659A6D0628D57F /* Pods-FanfouExpressTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F39DA2307EFC0987BDCE410F /* Pods_FanfouExpressTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpressTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACD270288DDB08BF73B20495 /* Pods-FanfouExpressTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests.release.xcconfig"; sourceTree = "<group>"; };
+		C31616DE1D2153DC83048F70 /* Pods-FanfouExpressUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C5122E889554C41CFB367730 /* Pods_FanfouExpressTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpressTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1061D2660BA2CF7B6DC3F00 /* Pods-FanfouExpressUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanfouExpressUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E2AE472FEF8FA61DDB883240 /* Pods_FanfouExpress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F73753F52A15926E48C24EC7 /* Pods_FanfouExpressUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanfouExpressUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FA1A0479C41C9D6C6727968 /* Pods_FanfouExpress.framework in Frameworks */,
+				0862BB77686897F9E1CA33E1 /* Pods_FanfouExpress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E5691735C98F8AB9EAEFA91 /* Pods_FanfouExpressTests.framework in Frameworks */,
+				DA7A5547BA1A355D1DE303B1 /* Pods_FanfouExpressTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FC4302DC8A33409E0CA805B /* Pods_FanfouExpressUITests.framework in Frameworks */,
+				90E2E2D6ACEF022FB547F1FF /* Pods_FanfouExpressUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,8 +191,8 @@
 				8BD3C6641E84912D0061455A /* FanfouExpressTests */,
 				8BD3C66F1E84912D0061455A /* FanfouExpressUITests */,
 				8BD3C64E1E84912D0061455A /* Products */,
-				A7691929D676BDF3D33E50D2 /* Pods */,
-				A4BF7F6667D207942A149D39 /* Frameworks */,
+				E5819E6474D82A634E3936B6 /* Pods */,
+				9A872E97093693C6468E3649 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -240,25 +240,25 @@
 			path = FanfouExpressUITests;
 			sourceTree = "<group>";
 		};
-		A4BF7F6667D207942A149D39 /* Frameworks */ = {
+		9A872E97093693C6468E3649 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2253A54A0C3DC828D8DEA42C /* Pods_FanfouExpress.framework */,
-				F39DA2307EFC0987BDCE410F /* Pods_FanfouExpressTests.framework */,
-				1E02855BCAEEA3895FA10C82 /* Pods_FanfouExpressUITests.framework */,
+				E2AE472FEF8FA61DDB883240 /* Pods_FanfouExpress.framework */,
+				C5122E889554C41CFB367730 /* Pods_FanfouExpressTests.framework */,
+				F73753F52A15926E48C24EC7 /* Pods_FanfouExpressUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A7691929D676BDF3D33E50D2 /* Pods */ = {
+		E5819E6474D82A634E3936B6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C4D743942131045245C6D229 /* Pods-FanfouExpress.debug.xcconfig */,
-				47D360653A542CEA5869F63A /* Pods-FanfouExpress.release.xcconfig */,
-				DC415776A9659A6D0628D57F /* Pods-FanfouExpressTests.debug.xcconfig */,
-				B85525FD73FEEA26159B73E4 /* Pods-FanfouExpressTests.release.xcconfig */,
-				BC76A3615025083D1541A67D /* Pods-FanfouExpressUITests.debug.xcconfig */,
-				C59F3AAEA359FDD6B376F4BD /* Pods-FanfouExpressUITests.release.xcconfig */,
+				718C1F28D9B1C46E09B02290 /* Pods-FanfouExpress.debug.xcconfig */,
+				3BB4796CD9F46551AA3F15EB /* Pods-FanfouExpress.release.xcconfig */,
+				6FB54098F148C2B4385AECE7 /* Pods-FanfouExpressTests.debug.xcconfig */,
+				ACD270288DDB08BF73B20495 /* Pods-FanfouExpressTests.release.xcconfig */,
+				D1061D2660BA2CF7B6DC3F00 /* Pods-FanfouExpressUITests.debug.xcconfig */,
+				C31616DE1D2153DC83048F70 /* Pods-FanfouExpressUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -270,13 +270,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BD3C6751E84912D0061455A /* Build configuration list for PBXNativeTarget "FanfouExpress" */;
 			buildPhases = (
-				4776A1A83AF1C76AF2A22D33 /* [CP] Check Pods Manifest.lock */,
+				4AB785F93ACBAF7F2F9D239E /* [CP] Check Pods Manifest.lock */,
 				8BD3C6491E84912C0061455A /* Sources */,
 				8BD3C64A1E84912C0061455A /* Frameworks */,
 				8BD3C64B1E84912C0061455A /* Resources */,
-				636953C43A20C1CF7E16C50C /* [CP] Embed Pods Frameworks */,
-				9EDC29D2776E82A4F50D1ADF /* [CP] Copy Pods Resources */,
 				8B996A271E9D0C0F00283CDB /* Crashlytics */,
+				E1A3BE5498DCA762DD0A4603 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -291,12 +290,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BD3C6781E84912D0061455A /* Build configuration list for PBXNativeTarget "FanfouExpressTests" */;
 			buildPhases = (
-				A07F15B674992C561E0C5F0D /* [CP] Check Pods Manifest.lock */,
+				8B78503CE4B53E7AEAD4E51E /* [CP] Check Pods Manifest.lock */,
 				8BD3C65D1E84912D0061455A /* Sources */,
 				8BD3C65E1E84912D0061455A /* Frameworks */,
 				8BD3C65F1E84912D0061455A /* Resources */,
-				F7B56774C9C2FA9BF6A42B99 /* [CP] Embed Pods Frameworks */,
-				7C253B057A7517AFCBE273C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,12 +309,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BD3C67B1E84912D0061455A /* Build configuration list for PBXNativeTarget "FanfouExpressUITests" */;
 			buildPhases = (
-				213CB6A2F853EB32458CAFF5 /* [CP] Check Pods Manifest.lock */,
+				22533CBC52FB377062953B6E /* [CP] Check Pods Manifest.lock */,
 				8BD3C6681E84912D0061455A /* Sources */,
 				8BD3C6691E84912D0061455A /* Frameworks */,
 				8BD3C66A1E84912D0061455A /* Resources */,
-				7487AA8FB7A9AD1CA7C37922 /* [CP] Embed Pods Frameworks */,
-				F61FD3E3B9C64043104E3E10 /* [CP] Copy Pods Resources */,
 				8B941B19207B9F2700B04B5B /* Swiftlint */,
 			);
 			buildRules = (
@@ -408,7 +403,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		213CB6A2F853EB32458CAFF5 /* [CP] Check Pods Manifest.lock */ = {
+		22533CBC52FB377062953B6E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,7 +421,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4776A1A83AF1C76AF2A22D33 /* [CP] Check Pods Manifest.lock */ = {
+		4AB785F93ACBAF7F2F9D239E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,62 +439,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		636953C43A20C1CF7E16C50C /* [CP] Embed Pods Frameworks */ = {
+		8B78503CE4B53E7AEAD4E51E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework",
-				"${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework",
-				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer-14/iOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTCoreText.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTFoundation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"$(DERIVED_FILE_DIR)/Pods-FanfouExpressTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7487AA8FB7A9AD1CA7C37922 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7C253B057A7517AFCBE273C6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B941B19207B9F2700B04B5B /* Swiftlint */ = {
@@ -530,67 +485,30 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" cb8cdb709a8e8d9acc7395d6143887e8f7604ae3 317add51e53547c685367d1cb24057360fd99c5078580a9a9c395cfbaa2a637c";
 		};
-		9EDC29D2776E82A4F50D1ADF /* [CP] Copy Pods Resources */ = {
+		E1A3BE5498DCA762DD0A4603 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A07F15B674992C561E0C5F0D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FanfouExpressTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F61FD3E3B9C64043104E3E10 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpressUITests/Pods-FanfouExpressUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F7B56774C9C2FA9BF6A42B99 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework",
+				"${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTCoreText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTFoundation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpressTests/Pods-FanfouExpressTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FanfouExpress/Pods-FanfouExpress-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -775,7 +693,7 @@
 		};
 		8BD3C6761E84912D0061455A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4D743942131045245C6D229 /* Pods-FanfouExpress.debug.xcconfig */;
+			baseConfigurationReference = 718C1F28D9B1C46E09B02290 /* Pods-FanfouExpress.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VSVRCTTR62;
@@ -791,7 +709,7 @@
 		};
 		8BD3C6771E84912D0061455A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47D360653A542CEA5869F63A /* Pods-FanfouExpress.release.xcconfig */;
+			baseConfigurationReference = 3BB4796CD9F46551AA3F15EB /* Pods-FanfouExpress.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VSVRCTTR62;
@@ -807,7 +725,7 @@
 		};
 		8BD3C6791E84912D0061455A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC415776A9659A6D0628D57F /* Pods-FanfouExpressTests.debug.xcconfig */;
+			baseConfigurationReference = 6FB54098F148C2B4385AECE7 /* Pods-FanfouExpressTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -824,7 +742,7 @@
 		};
 		8BD3C67A1E84912D0061455A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B85525FD73FEEA26159B73E4 /* Pods-FanfouExpressTests.release.xcconfig */;
+			baseConfigurationReference = ACD270288DDB08BF73B20495 /* Pods-FanfouExpressTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -841,7 +759,7 @@
 		};
 		8BD3C67C1E84912D0061455A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC76A3615025083D1541A67D /* Pods-FanfouExpressUITests.debug.xcconfig */;
+			baseConfigurationReference = D1061D2660BA2CF7B6DC3F00 /* Pods-FanfouExpressUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = FanfouExpressUITests/Info.plist;
@@ -856,7 +774,7 @@
 		};
 		8BD3C67D1E84912D0061455A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C59F3AAEA359FDD6B376F4BD /* Pods-FanfouExpressUITests.release.xcconfig */;
+			baseConfigurationReference = C31616DE1D2153DC83048F70 /* Pods-FanfouExpressUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = FanfouExpressUITests/Info.plist;

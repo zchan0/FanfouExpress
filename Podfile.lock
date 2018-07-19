@@ -21,7 +21,6 @@ PODS:
     - DTFoundation/Core
   - Fabric (1.7.6)
   - FLAnimatedImage (1.0.12)
-  - Reveal-SDK (14)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -30,8 +29,17 @@ DEPENDENCIES:
   - DTCoreText
   - Fabric
   - FLAnimatedImage
-  - Reveal-SDK
   - SVProgressHUD
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Crashlytics
+    - DTCoreText
+    - DTFoundation
+    - Fabric
+    - FLAnimatedImage
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
@@ -40,9 +48,8 @@ SPEC CHECKSUMS:
   DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  Reveal-SDK: 55b5c5545233b680c2f8da734f202acc15d422b7
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 86faa6f409ccaa560938ab60c77f958af9a05d98
+PODFILE CHECKSUM: 5c3d792d1f41251926dd738074a7a8b540c6fa2d
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
