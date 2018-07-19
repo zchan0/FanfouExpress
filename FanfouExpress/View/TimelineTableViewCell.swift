@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import DTCoreText
+import Alamofire
 
 class TimelineTableViewCell: UITableViewCell {
     
@@ -121,7 +122,19 @@ class TimelineTableViewCell: UITableViewCell {
         
         if let imageURL = msg.image?.previewURL {
             previewImageView.isHidden = false
-            previewImageView.setImage(withURL: imageURL)
+            // 串行队列，异步执行
+            let serialQueue = DispatchQueue(label: "serial")    // serial is default
+            serialQueue.async {
+                Alamofire.request(imageURL).validate().responseData { (response) in
+                    guard let data = response.value else {
+                        return
+                    }
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                         self.previewImageView.image = image
+                    }
+                }
+            }
         }
     }
     

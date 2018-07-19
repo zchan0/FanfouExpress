@@ -77,22 +77,6 @@ extension Data {
     }
 }
 
-extension UIImageView {
-    
-    func setImage(withURL URL: URL) {
-        Alamofire.request(URL).validate().responseData { (response) in
-            guard let data = response.value else {
-                return
-            }
-            
-            let image = UIImage(data: data)
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-    }
-}
-
 extension UITableView {
     
     private func reuseIdentifier(ofClass aClass: AnyClass) -> String {

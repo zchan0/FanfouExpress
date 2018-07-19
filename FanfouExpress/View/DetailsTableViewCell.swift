@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class DetailHeaderCell: UITableViewCell {
 
@@ -60,7 +61,15 @@ class DetailHeaderCell: UITableViewCell {
     }
     
     func updateCell(withAvatar avatarURL: URL) {
-        avatarImageView.setImage(withURL: avatarURL)
+        DispatchQueue.global().async {
+            Alamofire.request(avatarURL).validate().responseData { (response) in
+                guard let data = response.value else { return }
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self.avatarImageView.image = image
+                }
+            }
+        }
     }
     
     class func height(forWidth width: CGFloat) -> CGFloat {
