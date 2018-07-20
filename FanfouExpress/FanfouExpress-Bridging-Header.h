@@ -9,3 +9,4 @@
 #import <DTCoreText/DTCoreText.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <FLAnimatedImage/FLAnimatedImage.h>
+#import <Bugly/Bugly.h>

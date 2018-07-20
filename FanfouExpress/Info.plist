@@ -20,20 +20,6 @@
 	<string>0.0.2</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>cb8cdb709a8e8d9acc7395d6143887e8f7604ae3</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -89,5 +75,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>Appid</key>
+	<dict>
+		<key>BuglyAppIDString</key>
+		<string>e3cc5a73dc</string>
+	</dict>
+	<key>开启Debug信息显示</key>
+	<dict>
+		<key>BuglyDebugEnable</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

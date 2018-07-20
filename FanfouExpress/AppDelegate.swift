@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Fabric
-import Crashlytics
+import Bugly
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedStringKey.font: NavigationBarAppearance.TitleFont
         ]
         navigationController.navigationBar.isTranslucent = false
-
-        // Crashlytics
-        Fabric.with([Crashlytics.self])
+        
+        // Bugly
+        Bugly.start(withAppId: nil)
         
         return true
     }
