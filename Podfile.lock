@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (4.7.1)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
+  - Bugly (2.5.0)
   - DTCoreText (1.6.21):
     - DTCoreText/Core (= 1.6.21)
     - DTFoundation/Core (~> 1.7.5)
@@ -19,37 +18,33 @@ PODS:
     - DTFoundation/Core
   - DTFoundation/UIKit (1.7.13):
     - DTFoundation/Core
-  - Fabric (1.7.6)
   - FLAnimatedImage (1.0.12)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
-  - Crashlytics
+  - Bugly
   - DTCoreText
-  - Fabric
   - FLAnimatedImage
   - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - Crashlytics
+    - Bugly
     - DTCoreText
     - DTFoundation
-    - Fabric
     - FLAnimatedImage
     - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
   DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 5c3d792d1f41251926dd738074a7a8b540c6fa2d
+PODFILE CHECKSUM: 90356679f00a2e82ff6abeb284528c24e6820468
 
 COCOAPODS: 1.5.3

@@ -9,9 +9,9 @@ target 'FanfouExpress' do
   pod 'Alamofire', '~> 4.4'
   pod 'DTCoreText'
   pod 'FLAnimatedImage'
-  pod 'Fabric'
-  pod 'Crashlytics' 
   pod 'SVProgressHUD'
+  pod 'Bugly'
+
 
   target 'FanfouExpressTests' do
     inherit! :search_paths
