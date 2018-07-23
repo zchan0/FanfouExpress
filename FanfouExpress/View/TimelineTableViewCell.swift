@@ -35,6 +35,7 @@ class TimelineTableViewCell: UITableViewCell {
         return previewImageView
     }
     
+    var imageRequest: DataRequest?
     var tapPreviewImageBlock: ((UIImageView) -> Void)?
 
     private var contentLabel: DTAttributedLabel
@@ -110,6 +111,11 @@ class TimelineTableViewCell: UITableViewCell {
         screenNameLabel.text = nil
         previewImageView.image = nil
         previewImageView.isHidden = true
+        
+        if let request = self.imageRequest {
+            request.cancel()
+            self.imageRequest = nil
+        }
     }
     
 // - MARK: 
@@ -122,17 +128,13 @@ class TimelineTableViewCell: UITableViewCell {
         
         if let imageURL = msg.image?.previewURL {
             previewImageView.isHidden = false
-            // 串行队列，异步执行
-            let serialQueue = DispatchQueue(label: "serial")    // serial is default
-            serialQueue.async {
-                Alamofire.request(imageURL).validate().responseData { (response) in
-                    guard let data = response.value else {
-                        return
-                    }
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                         self.previewImageView.image = image
-                    }
+            self.imageRequest = Alamofire.request(imageURL).validate().responseData { (response) in
+                guard let data = response.value else {
+                    return
+                }
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                     self.previewImageView.image = image
                 }
             }
         }
